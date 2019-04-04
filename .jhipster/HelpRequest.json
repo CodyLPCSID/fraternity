@@ -1,0 +1,43 @@
+{
+    "name": "HelpRequest",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "datePost",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateStart",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateEnd",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "helpAction",
+            "otherEntityRelationshipName": "helpRequest",
+            "relationshipName": "helpR",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190404080712",
+    "entityTableName": "help_request",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,14 @@
+{
+    "name": "HelpAction",
+    "fields": [],
+    "relationships": [],
+    "changelogDate": "20190404080713",
+    "entityTableName": "help_action",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
