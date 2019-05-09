@@ -21,6 +21,7 @@
             <th><span jhiTranslate="fraternityApp.helpOffer.dateStart">Date Start</span></th>
             <th><span jhiTranslate="fraternityApp.helpOffer.dateEnd">Date End</span></th>
             <th><span jhiTranslate="fraternityApp.helpOffer.helpO">Help O</span></th>
+            <th><span jhiTranslate="fraternityApp.helpOffer.addOffer">Add Offer</span></th>
             <th></th>
             </tr>
             </thead>
@@ -36,6 +37,9 @@
                     <div *ngIf="helpOffer.helpO">
                         <a [routerLink]="['../help-action', helpOffer.helpO?.id, 'view' ]" >{{helpOffer.helpO?.id}}</a>
                     </div>
+                </td>
+                <td>
+                    {{helpOffer.addOffer?.login}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

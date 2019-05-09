@@ -57,6 +57,13 @@
                         <option [ngValue]="helpActionOption.id === helpOffer.helpO?.id ? helpOffer.helpO : helpActionOption" *ngFor="let helpActionOption of helpactions; trackBy: trackHelpActionById">{{helpActionOption.id}}</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="fraternityApp.helpOffer.addOffer" for="field_addOffer">Add Offer</label>
+                    <select class="form-control" id="field_addOffer" name="addOffer" [(ngModel)]="helpOffer.addOffer" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === helpOffer.addOffer?.id ? helpOffer.addOffer : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

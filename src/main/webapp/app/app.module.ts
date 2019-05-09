@@ -17,8 +17,10 @@ import { FraternityAppRoutingModule } from './app-routing.module';
 import { FraternityHomeModule } from './home/home.module';
 import { FraternityAccountModule } from './account/account.module';
 import { FraternityEntityModule } from './entities/entity.module';
+import { OfferModule } from './offer/offer.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
+import { OfferComponent } from './offer/offer.component';
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 
 @NgModule({
@@ -36,11 +38,20 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         FraternityCoreModule,
         FraternityHomeModule,
         FraternityAccountModule,
+        OfferModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         FraternityEntityModule,
         FraternityAppRoutingModule
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+    declarations: [
+        JhiMainComponent,
+        NavbarComponent,
+        ErrorComponent,
+        PageRibbonComponent,
+        ActiveMenuDirective,
+        FooterComponent,
+        OfferComponent
+    ],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

@@ -31,6 +31,10 @@
                         <a [routerLink]="['/help-action', helpOffer.helpO?.id, 'view']">{{helpOffer.helpO?.id}}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="fraternityApp.helpOffer.addOffer">Add Offer</span></dt>
+                <dd>
+                    {{helpOffer.addOffer?.login}}
+                </dd>
             </dl>
 
             <button type="submit"

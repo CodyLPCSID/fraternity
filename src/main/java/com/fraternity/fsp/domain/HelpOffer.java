@@ -44,6 +44,10 @@ public class HelpOffer implements Serializable {
     @JsonIgnoreProperties("helpOffers")
     private HelpAction helpO;
 
+    @ManyToOne
+    @JsonIgnoreProperties("helpOffers")
+    private User addOffer;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -129,6 +133,19 @@ public class HelpOffer implements Serializable {
 
     public void setHelpO(HelpAction helpAction) {
         this.helpO = helpAction;
+    }
+
+    public User getAddOffer() {
+        return addOffer;
+    }
+
+    public HelpOffer addOffer(User user) {
+        this.addOffer = user;
+        return this;
+    }
+
+    public void setAddOffer(User user) {
+        this.addOffer = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -1,5 +1,25 @@
 {
-    "name": "HelpOffer",
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "helpAction",
+            "otherEntityRelationshipName": "helpOffer",
+            "relationshipName": "helpO",
+            "otherEntityField": "id",
+            "otherEntityRelationshipNameUndefined": false
+        },
+        {
+            "relationshipName": "addOffer",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "helpOffer",
+            "otherEntityRelationshipNameUndefined": false
+        }
+    ],
     "fields": [
         {
             "fieldName": "title",
@@ -22,22 +42,12 @@
             "fieldType": "LocalDate"
         }
     ],
-    "relationships": [
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "helpAction",
-            "otherEntityRelationshipName": "helpOffer",
-            "relationshipName": "helpO",
-            "otherEntityField": "id"
-        }
-    ],
     "changelogDate": "20190404080711",
-    "entityTableName": "help_offer",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": false,
     "service": "no",
+    "entityTableName": "help_offer",
+    "databaseType": "sql",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }

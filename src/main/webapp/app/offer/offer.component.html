@@ -1,0 +1,36 @@
+
+
+
+<div>
+  <h2 id="page-heading">
+    <span>Annonces</span>
+    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-help-request" [routerLink]="['/help-request/new']">
+        <fa-icon [icon]="'plus'"></fa-icon>
+        <span>
+        Ajouter une nouvelle annonce
+        </span>
+    </button>
+  </h2>
+
+  <div class="table-responsive" *ngIf="helpRequests">
+      <div class="offer" *ngFor="let helpRequest of helpRequests ;trackBy: trackId">
+        <div>{{helpRequest.title}}</div>
+        <div>{{helpRequest.description}}</div>
+        <div>{{helpRequest.datePost | date:'mediumDate'}}</div>
+        <div>{{helpRequest.dateStart | date:'mediumDate'}}</div>
+        <div>{{helpRequest.dateEnd | date:'mediumDate'}}</div>
+      </div>
+
+      <!-- <ngb-pagination
+        class="d-flex justify-content-center"
+        [collectionSize]="json.total_pages"
+        [(page)]="page"
+        [maxSize]="5"
+        [rotate]="true"
+        (pageChange)="loadPage($event)"
+        [ellipses]="false"
+        [boundaryLinks]="true">
+      </ngb-pagination> -->
+
+  </div>
+</div>

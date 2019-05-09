@@ -23,6 +23,10 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'help-action',
                 loadChildren: './help-action/help-action.module#FraternityHelpActionModule'
+            },
+            {
+                path: 'help-offer',
+                loadChildren: './help-offer/help-offer.module#FraternityHelpOfferModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])
