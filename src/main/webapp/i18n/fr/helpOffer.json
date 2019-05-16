@@ -20,7 +20,9 @@
             "datePost": "Date Post",
             "dateStart": "Date Start",
             "dateEnd": "Date End",
-            "helpO": "Help O"
+            "helpO": "Help O",
+            "user": "User",
+            "category": "Category"
         }
     }
 }

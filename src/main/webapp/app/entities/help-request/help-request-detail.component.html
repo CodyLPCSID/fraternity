@@ -31,6 +31,16 @@
                         <a [routerLink]="['/help-action', helpRequest.helpR?.id, 'view']">{{helpRequest.helpR?.id}}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="fraternityApp.helpRequest.user">User</span></dt>
+                <dd>
+                    {{helpRequest.user?.login}}
+                </dd>
+                <dt><span jhiTranslate="fraternityApp.helpRequest.category">Category</span></dt>
+                <dd>
+                    <div *ngIf="helpRequest.category">
+                        <a [routerLink]="['/category', helpRequest.category?.id, 'view']">{{helpRequest.category?.id}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

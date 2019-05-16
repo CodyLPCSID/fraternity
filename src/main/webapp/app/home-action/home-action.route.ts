@@ -1,12 +1,12 @@
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
-import { AddOfferComponent } from './add-offer.component';
-import { UserRouteAccessService } from '../../core';
+import { HomeActionComponent } from './home-action.component';
+import { UserRouteAccessService } from 'app/core';
 
-export const addOfferRoute: Routes = [
+export const HomeActionRoute: Routes = [
     {
-        path: 'addOffer',
-        component: AddOfferComponent,
+        path: 'homeAction',
+        component: HomeActionComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'Offer'

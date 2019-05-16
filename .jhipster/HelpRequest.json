@@ -1,5 +1,33 @@
 {
-    "name": "HelpRequest",
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "helpAction",
+            "otherEntityRelationshipName": "helpRequest",
+            "relationshipName": "helpR",
+            "otherEntityField": "id",
+            "otherEntityRelationshipNameUndefined": false
+        },
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "helpRequest",
+            "otherEntityRelationshipNameUndefined": false
+        },
+        {
+            "relationshipName": "category",
+            "otherEntityName": "category",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "helpRequest",
+            "otherEntityRelationshipNameUndefined": true
+        }
+    ],
     "fields": [
         {
             "fieldName": "title",
@@ -22,22 +50,12 @@
             "fieldType": "LocalDate"
         }
     ],
-    "relationships": [
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "helpAction",
-            "otherEntityRelationshipName": "helpRequest",
-            "relationshipName": "helpR",
-            "otherEntityField": "id"
-        }
-    ],
     "changelogDate": "20190404080712",
-    "entityTableName": "help_request",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": false,
     "service": "no",
+    "entityTableName": "help_request",
+    "databaseType": "sql",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }

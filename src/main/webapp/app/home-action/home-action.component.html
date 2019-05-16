@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-3">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/help-offer/new" routerLinkActive="active">Offer</a>
+                    <!--/addOffer-->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/help-request/new">Request</a>
+                </li>
+                <!--  to do: droit d'acces si le user est association member  -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Association</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Message</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-sm-9">
+                <router-outlet></router-outlet>
+<!--            <jhi-add-offer></jhi-add-offer>-->
+        </div>
+
+    </div>
+</div>

@@ -14,5 +14,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="help_action"/>
 
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="help_request"
+                                 constraintName="fk_help_request_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="category_id"
+                                 baseTableName="help_request"
+                                 constraintName="fk_help_request_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category"/>
+
     </changeSet>
 </databaseChangeLog>

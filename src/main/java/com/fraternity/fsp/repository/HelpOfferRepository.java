@@ -4,6 +4,7 @@ import com.fraternity.fsp.domain.HelpOffer;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
 /**
  * Spring Data  repository for the HelpOffer entity.
@@ -11,5 +12,8 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface HelpOfferRepository extends JpaRepository<HelpOffer, Long> {
+
+    @Query("select help_offer from HelpOffer help_offer where help_offer.user.login = ?#{principal.username}")
+    List<HelpOffer> findByUserIsCurrentUser();
 
 }

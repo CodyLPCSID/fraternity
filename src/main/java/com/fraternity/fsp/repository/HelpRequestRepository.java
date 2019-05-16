@@ -4,6 +4,7 @@ import com.fraternity.fsp.domain.HelpRequest;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
 /**
  * Spring Data  repository for the HelpRequest entity.
@@ -11,5 +12,8 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface HelpRequestRepository extends JpaRepository<HelpRequest, Long> {
+
+    @Query("select help_request from HelpRequest help_request where help_request.user.login = ?#{principal.username}")
+    List<HelpRequest> findByUserIsCurrentUser();
 
 }
