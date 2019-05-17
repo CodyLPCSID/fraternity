@@ -44,6 +44,14 @@ public class HelpRequest implements Serializable {
     @JsonIgnoreProperties("helpRequests")
     private HelpAction helpR;
 
+    @ManyToOne
+    @JsonIgnoreProperties("helpRequests")
+    private User user;
+
+    @ManyToOne
+    @JsonIgnoreProperties("helpRequests")
+    private Category category;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -129,6 +137,32 @@ public class HelpRequest implements Serializable {
 
     public void setHelpR(HelpAction helpAction) {
         this.helpR = helpAction;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public HelpRequest user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public HelpRequest category(Category category) {
+        this.category = category;
+        return this;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

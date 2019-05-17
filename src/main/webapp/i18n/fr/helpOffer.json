@@ -21,7 +21,8 @@
             "dateStart": "Date Start",
             "dateEnd": "Date End",
             "helpO": "Help O",
-            "addOffer": "Add Offer"
+            "user": "User",
+            "category": "Category"
         }
     }
 }

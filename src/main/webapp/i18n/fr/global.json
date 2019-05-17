@@ -12,6 +12,7 @@
                 "helpOffer": "Help Offer",
                 "helpRequest": "Help Request",
                 "helpAction": "Help Action",
+                "category": "Category",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface HelpOfferRepository extends JpaRepository<HelpOffer, Long> {
 
-    @Query("select help_offer from HelpOffer help_offer where help_offer.addOffer.login = ?#{principal.username}")
-    List<HelpOffer> findByAddOfferIsCurrentUser();
+    @Query("select help_offer from HelpOffer help_offer where help_offer.user.login = ?#{principal.username}")
+    List<HelpOffer> findByUserIsCurrentUser();
 
 }

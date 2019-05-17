@@ -1,5 +1,7 @@
 import { Moment } from 'moment';
 import { IHelpAction } from 'app/shared/model/help-action.model';
+import { IUser } from 'app/core/user/user.model';
+import { ICategory } from 'app/shared/model/category.model';
 
 export interface IHelpRequest {
     id?: number;
@@ -9,6 +11,8 @@ export interface IHelpRequest {
     dateStart?: Moment;
     dateEnd?: Moment;
     helpR?: IHelpAction;
+    user?: IUser;
+    category?: ICategory;
 }
 
 export class HelpRequest implements IHelpRequest {
@@ -19,6 +23,8 @@ export class HelpRequest implements IHelpRequest {
         public datePost?: Moment,
         public dateStart?: Moment,
         public dateEnd?: Moment,
-        public helpR?: IHelpAction
+        public helpR?: IHelpAction,
+        public user?: IUser,
+        public category?: ICategory
     ) {}
 }

@@ -7,12 +7,24 @@
         Added the constraints for entity HelpRequest.
     -->
     <changeSet id="20190404080712-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="helpr_id"
                                  baseTableName="help_request"
                                  constraintName="fk_help_request_helpr_id"
                                  referencedColumnNames="id"
                                  referencedTableName="help_action"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="help_request"
+                                 constraintName="fk_help_request_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="category_id"
+                                 baseTableName="help_request"
+                                 constraintName="fk_help_request_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category"/>
 
     </changeSet>
 </databaseChangeLog>

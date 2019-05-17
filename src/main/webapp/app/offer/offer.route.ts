@@ -13,7 +13,7 @@ export const OfferRoute: Routes = [
         component: OfferComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'fraternityApp.Offer.home.title'
+            pageTitle: 'Les annonces'
         },
         canActivate: [UserRouteAccessService]
     }

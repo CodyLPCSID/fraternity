@@ -7,18 +7,24 @@
         Added the constraints for entity HelpOffer.
     -->
     <changeSet id="20190404080711-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="helpo_id"
                                  baseTableName="help_offer"
                                  constraintName="fk_help_offer_helpo_id"
                                  referencedColumnNames="id"
                                  referencedTableName="help_action"/>
 
-        <addForeignKeyConstraint baseColumnNames="add_offer_id"
+        <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="help_offer"
-                                 constraintName="fk_help_offer_add_offer_id"
+                                 constraintName="fk_help_offer_user_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="category_id"
+                                 baseTableName="help_offer"
+                                 constraintName="fk_help_offer_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -31,9 +31,15 @@
                         <a [routerLink]="['/help-action', helpOffer.helpO?.id, 'view']">{{helpOffer.helpO?.id}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="fraternityApp.helpOffer.addOffer">Add Offer</span></dt>
+                <dt><span jhiTranslate="fraternityApp.helpOffer.user">User</span></dt>
                 <dd>
-                    {{helpOffer.addOffer?.login}}
+                    {{helpOffer.user?.login}}
+                </dd>
+                <dt><span jhiTranslate="fraternityApp.helpOffer.category">Category</span></dt>
+                <dd>
+                    <div *ngIf="helpOffer.category">
+                        <a [routerLink]="['/category', helpOffer.category?.id, 'view']">{{helpOffer.category?.id}}</a>
+                    </div>
                 </dd>
             </dl>
 

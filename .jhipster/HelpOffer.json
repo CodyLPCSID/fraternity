@@ -11,13 +11,21 @@
             "otherEntityRelationshipNameUndefined": false
         },
         {
-            "relationshipName": "addOffer",
+            "relationshipName": "user",
             "otherEntityName": "user",
             "relationshipType": "many-to-one",
             "otherEntityField": "login",
             "ownerSide": true,
             "otherEntityRelationshipName": "helpOffer",
             "otherEntityRelationshipNameUndefined": false
+        },
+        {
+            "relationshipName": "category",
+            "otherEntityName": "category",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "helpOffer",
+            "otherEntityRelationshipNameUndefined": true
         }
     ],
     "fields": [

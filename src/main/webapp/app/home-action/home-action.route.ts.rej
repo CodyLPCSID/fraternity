@@ -1,0 +1,7 @@
+diff a/src/main/webapp/app/home-action/home-action.route.ts b/src/main/webapp/app/home-action/home-action.route.ts	(rejected hunks)
+@@ -1,4 +1 @@
+-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes} from '@angular/router';
+-
+-import {AddOfferComponent} from './add-offer.component';
+-import {UserRouteAccessService} from '../../core';
++import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes } from '@angular/router';

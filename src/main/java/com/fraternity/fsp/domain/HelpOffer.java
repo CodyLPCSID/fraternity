@@ -20,7 +20,7 @@ import java.util.Objects;
 public class HelpOffer implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -46,7 +46,11 @@ public class HelpOffer implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("helpOffers")
-    private User addOffer;
+    private User user;
+
+    @ManyToOne
+    @JsonIgnoreProperties("helpOffers")
+    private Category category;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -135,17 +139,30 @@ public class HelpOffer implements Serializable {
         this.helpO = helpAction;
     }
 
-    public User getAddOffer() {
-        return addOffer;
+    public User getUser() {
+        return user;
     }
 
-    public HelpOffer addOffer(User user) {
-        this.addOffer = user;
+    public HelpOffer user(User user) {
+        this.user = user;
         return this;
     }
 
-    public void setAddOffer(User user) {
-        this.addOffer = user;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public HelpOffer category(Category category) {
+        this.category = category;
+        return this;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
