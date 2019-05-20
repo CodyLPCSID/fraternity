@@ -69,7 +69,13 @@
 
             <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
               <a class="nav-link" routerLink="offer" (click)="collapseNavbar()">
-                <span>Offer</span>
+                <span>Les annonces</span>
+              </a>
+            </li>
+
+            <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+              <a class="nav-link" routerLink="associations" (click)="collapseNavbar()">
+                <span>Les associations</span>
               </a>
             </li>
 

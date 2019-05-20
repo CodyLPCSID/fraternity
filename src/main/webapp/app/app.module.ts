@@ -18,9 +18,11 @@ import { FraternityHomeModule } from './home/home.module';
 import { FraternityAccountModule } from './account/account.module';
 import { FraternityEntityModule } from './entities/entity.module';
 import { OfferModule } from './offer/offer.module';
+import { AssociationModule } from './association/association.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { OfferComponent } from './offer/offer.component';
+import { AssociationComponent } from './association/association.component';
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 
 @NgModule({
@@ -39,6 +41,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         FraternityHomeModule,
         FraternityAccountModule,
         OfferModule,
+        AssociationModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         FraternityEntityModule,
         FraternityAppRoutingModule
@@ -50,7 +53,8 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         PageRibbonComponent,
         ActiveMenuDirective,
         FooterComponent,
-        OfferComponent
+        OfferComponent,
+        AssociationComponent
     ],
     providers: [
         {

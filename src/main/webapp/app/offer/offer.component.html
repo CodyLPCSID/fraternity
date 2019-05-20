@@ -21,16 +21,16 @@
         <div>{{helpRequest.dateEnd | date:'mediumDate'}}</div>
       </div>
 
-      <!-- <ngb-pagination
+      <ngb-pagination
         class="d-flex justify-content-center"
         [collectionSize]="json.total_pages"
         [(page)]="page"
         [maxSize]="5"
-        [rotate]="true"
-        (pageChange)="loadPage($event)"
+        [rotate]="true">
+        <!-- (pageChange)="loadPage($event)"
         [ellipses]="false"
-        [boundaryLinks]="true">
-      </ngb-pagination> -->
+        [boundaryLinks]="true"> -->
+      </ngb-pagination>
 
   </div>
 </div>
