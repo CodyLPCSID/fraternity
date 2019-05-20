@@ -22,7 +22,7 @@
     "changelogDate": "20190404080709",
     "entityTableName": "association",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pagination",
     "service": "no",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

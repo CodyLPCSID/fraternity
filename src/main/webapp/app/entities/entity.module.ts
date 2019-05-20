@@ -27,6 +27,30 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'category',
                 loadChildren: './category/category.module#FraternityCategoryModule'
+            },
+            {
+                path: 'help-offer',
+                loadChildren: './help-offer/help-offer.module#FraternityHelpOfferModule'
+            },
+            {
+                path: 'help-offer',
+                loadChildren: './help-offer/help-offer.module#FraternityHelpOfferModule'
+            },
+            {
+                path: 'help-offer',
+                loadChildren: './help-offer/help-offer.module#FraternityHelpOfferModule'
+            },
+            {
+                path: 'association',
+                loadChildren: './association/association.module#FraternityAssociationModule'
+            },
+            {
+                path: 'association',
+                loadChildren: './association/association.module#FraternityAssociationModule'
+            },
+            {
+                path: 'association',
+                loadChildren: './association/association.module#FraternityAssociationModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])

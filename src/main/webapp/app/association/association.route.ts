@@ -13,11 +13,14 @@ export const AssociationRoute: Routes = [
     {
         path: 'associations',
         component: AssociationComponent,
+        resolve: {
+            pagingParams: JhiResolvePagingParams
+        },
         data: {
             authorities: ['ROLE_USER'],
+            defaultSort: 'id,asc',
             pageTitle: 'Les associations'
         },
-        resolve: { pagingParams: JhiResolvePagingParams },
         canActivate: [UserRouteAccessService]
     }
 ];

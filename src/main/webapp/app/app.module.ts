@@ -24,6 +24,8 @@ import * as moment from 'moment';
 import { OfferComponent } from './offer/offer.component';
 import { AssociationComponent } from './association/association.component';
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
+import { HomeActionModule } from 'app/home-action/home-action.module';
+import { AnnonceModule } from 'app/annonce/annonce.module';
 
 @NgModule({
     imports: [
@@ -40,8 +42,10 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         FraternityCoreModule,
         FraternityHomeModule,
         FraternityAccountModule,
-        OfferModule,
+        HomeActionModule,
+        AnnonceModule,
         AssociationModule,
+        OfferModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         FraternityEntityModule,
         FraternityAppRoutingModule

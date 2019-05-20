@@ -3,9 +3,14 @@ import com.fraternity.fsp.domain.Association;
 import com.fraternity.fsp.repository.AssociationRepository;
 import com.fraternity.fsp.web.rest.errors.BadRequestAlertException;
 import com.fraternity.fsp.web.rest.util.HeaderUtil;
+import com.fraternity.fsp.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -75,12 +80,15 @@ public class AssociationResource {
     /**
      * GET  /associations : get all the associations.
      *
+     * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of associations in body
      */
     @GetMapping("/associations")
-    public List<Association> getAllAssociations() {
-        log.debug("REST request to get all Associations");
-        return associationRepository.findAll();
+    public ResponseEntity<List<Association>> getAllAssociations(Pageable pageable) {
+        log.debug("REST request to get a page of Associations");
+        Page<Association> page = associationRepository.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/associations");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**

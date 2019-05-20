@@ -11,7 +11,7 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface HelpOfferRepository extends JpaRepository<HelpOffer, Long> {
+public interface HelpOfferRepository extends JpaRepository<HelpOffer, Long>, JpaSpecificationExecutor<HelpOffer> {
 
     @Query("select help_offer from HelpOffer help_offer where help_offer.user.login = ?#{principal.username}")
     List<HelpOffer> findByUserIsCurrentUser();

@@ -1,14 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { JhiEventManager, JhiAlertService, JhiParseLinks } from 'ng-jhipster';
-import { ITEMS_PER_PAGE } from 'app/shared';
-
-import { ActivatedRoute, Router } from '@angular/router';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { IAssociation } from 'app/shared/model/association.model';
 import { AccountService } from 'app/core';
+
+import { ITEMS_PER_PAGE } from 'app/shared';
 import { AssociationService } from './association.service';
 
 @Component({
@@ -17,33 +17,35 @@ import { AssociationService } from './association.service';
     styleUrls: ['association.component.css']
 })
 export class AssociationComponent implements OnInit, OnDestroy {
-    associations: IAssociation[];
     currentAccount: any;
+    associations: IAssociation[];
+    error: any;
+    success: any;
     eventSubscriber: Subscription;
+    routeData: any;
+    links: any;
+    totalItems: any;
+    itemsPerPage: any;
+    page: any;
     predicate: any;
     previousPage: any;
     reverse: any;
-    page: any;
-    routeData: any;
-    itemsPerPage: any;
-    totalItems: any;
-    links: any;
 
     constructor(
         protected associationService: AssociationService,
+        protected parseLinks: JhiParseLinks,
         protected jhiAlertService: JhiAlertService,
-        protected eventManager: JhiEventManager,
         protected accountService: AccountService,
-        private activatedRoute: ActivatedRoute,
-        private parseLinks: JhiParseLinks,
-        private router: Router
+        protected activatedRoute: ActivatedRoute,
+        protected router: Router,
+        protected eventManager: JhiEventManager
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data['pagingParams'].page;
-            this.previousPage = data['pagingParams'].page;
-            this.reverse = data['pagingParams'].ascending;
-            this.predicate = data['pagingParams'].predicate;
+            this.page = data.pagingParams.page;
+            this.previousPage = data.pagingParams.page;
+            this.reverse = data.pagingParams.ascending;
+            this.predicate = data.pagingParams.predicate;
         });
     }
 
@@ -54,16 +56,40 @@ export class AssociationComponent implements OnInit, OnDestroy {
                 size: this.itemsPerPage,
                 sort: this.sort()
             })
-            .pipe(
-                filter((res: HttpResponse<IAssociation[]>) => res.ok),
-                map((res: HttpResponse<IAssociation[]>) => res.body)
-            )
             .subscribe(
-                (res: IAssociation[]) => {
-                    this.associations = res;
-                },
+                (res: HttpResponse<IAssociation[]>) => this.paginateAssociations(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+    }
+
+    loadPage(page: number) {
+        if (page !== this.previousPage) {
+            this.previousPage = page;
+            this.transition();
+        }
+    }
+
+    transition() {
+        this.router.navigate(['/associations'], {
+            queryParams: {
+                page: this.page,
+                size: this.itemsPerPage,
+                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+            }
+        });
+        this.loadAll();
+    }
+
+    clear() {
+        this.page = 0;
+        this.router.navigate([
+            '/associations',
+            {
+                page: this.page,
+                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+            }
+        ]);
+        this.loadAll();
     }
 
     ngOnInit() {
@@ -94,26 +120,9 @@ export class AssociationComponent implements OnInit, OnDestroy {
         return result;
     }
 
-    loadPage(page: number) {
-        if (page !== this.previousPage) {
-            this.previousPage = page;
-            this.transition();
-        }
-    }
-
-    transition() {
-        this.router.navigate(['/associations/'], {
-            queryParams: {
-                page: this.page,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        });
-        this.loadAll();
-    }
-
-    private onSuccess(data, headers) {
+    protected paginateAssociations(data: IAssociation[], headers: HttpHeaders) {
         this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = headers.get('X-Total-Count');
+        this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.associations = data;
     }
 

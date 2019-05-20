@@ -7,7 +7,7 @@
         Added the constraints for entity HelpOffer.
     -->
     <changeSet id="20190404080711-2" author="jhipster">
-
+        
         <addForeignKeyConstraint baseColumnNames="helpo_id"
                                  baseTableName="help_offer"
                                  constraintName="fk_help_offer_helpo_id"

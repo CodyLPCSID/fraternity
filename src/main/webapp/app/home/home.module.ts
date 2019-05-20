@@ -7,6 +7,6 @@ import { HOME_ROUTE, HomeComponent } from './';
 @NgModule({
     imports: [FraternitySharedModule, RouterModule.forChild([HOME_ROUTE])],
     declarations: [HomeComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: []
 })
 export class FraternityHomeModule {}

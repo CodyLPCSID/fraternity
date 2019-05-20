@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-center"><h1> ANNONCES </h1></div>
+<div class="container">
+    <form>
+        <div class="form-group row">
+            <label for="category" class="col-sm-2 col-form-label">Category Filter</label>
+            <div class="col-sm-8">
+                <select [(ngModel)]="selectedCat" name="category" id="category" class="form-control">
+                    <option *ngFor="let category of categories ;trackBy: trackId" [value]="category.id">
+                        {{category.typeName}}
+                    </option>
+                </select>
+            </div>
+                <button (click)="search()" type="submit" class="btn btn-outline-primary"> Search</button>
+        </div>
+    </form>
+</div>
+
+<div *ngFor="let helpOffer of helpOffers ;trackBy: trackId">
+    <div class="card text-center" style="margin-top: 30px">
+        <div class="card-header">
+            <h3 class="card-title">{{helpOffer.title}}</h3>
+        </div>
+        <div class="card-body">
+            <h4 class="card-text">{{helpOffer.description}}</h4>
+            <p class="card-text text-muted">De {{helpOffer.dateStart | date:'mediumDate'}}
+                à {{helpOffer.dateEnd | date:'mediumDate'}}</p>
+            <!--                    <div *ngIf="helpOffer.helpO">-->
+            <!--                        <a [routerLink]="['../help-action', helpOffer.helpO?.id, 'view' ]">{{helpOffer.helpO?.id}}</a>-->
+            <!--                    </div>-->
+            <a [routerLink]="['/help-offer', helpOffer.id, 'view' ]" class="btn btn-primary">Voir Les
+                détails</a>
+        </div>
+        <div class="card-footer text-muted">
+            Poster le : {{helpOffer.datePost | date:'mediumDate'}}
+        </div>
+    </div>
+</div>
+<div *ngIf="helpOffers">
+    <div class="row justify-content-center">
+        <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+    </div>
+    <div class="row justify-content-center">
+        <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+    </div>
+</div>
