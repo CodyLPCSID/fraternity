@@ -1,8 +1,10 @@
 package com.fraternity.fsp.web.rest;
 import com.fraternity.fsp.domain.HelpOffer;
-import com.fraternity.fsp.repository.HelpOfferRepository;
+import com.fraternity.fsp.service.HelpOfferService;
 import com.fraternity.fsp.web.rest.errors.BadRequestAlertException;
 import com.fraternity.fsp.web.rest.util.HeaderUtil;
+import com.fraternity.fsp.service.dto.HelpOfferCriteria;
+import com.fraternity.fsp.service.HelpOfferQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,10 +28,13 @@ public class HelpOfferResource {
 
     private static final String ENTITY_NAME = "helpOffer";
 
-    private final HelpOfferRepository helpOfferRepository;
+    private final HelpOfferService helpOfferService;
 
-    public HelpOfferResource(HelpOfferRepository helpOfferRepository) {
-        this.helpOfferRepository = helpOfferRepository;
+    private final HelpOfferQueryService helpOfferQueryService;
+
+    public HelpOfferResource(HelpOfferService helpOfferService, HelpOfferQueryService helpOfferQueryService) {
+        this.helpOfferService = helpOfferService;
+        this.helpOfferQueryService = helpOfferQueryService;
     }
 
     /**
@@ -45,7 +50,7 @@ public class HelpOfferResource {
         if (helpOffer.getId() != null) {
             throw new BadRequestAlertException("A new helpOffer cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        HelpOffer result = helpOfferRepository.save(helpOffer);
+        HelpOffer result = helpOfferService.save(helpOffer);
         return ResponseEntity.created(new URI("/api/help-offers/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -66,7 +71,7 @@ public class HelpOfferResource {
         if (helpOffer.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        HelpOffer result = helpOfferRepository.save(helpOffer);
+        HelpOffer result = helpOfferService.save(helpOffer);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, helpOffer.getId().toString()))
             .body(result);
@@ -75,12 +80,26 @@ public class HelpOfferResource {
     /**
      * GET  /help-offers : get all the helpOffers.
      *
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of helpOffers in body
      */
     @GetMapping("/help-offers")
-    public List<HelpOffer> getAllHelpOffers() {
-        log.debug("REST request to get all HelpOffers");
-        return helpOfferRepository.findAll();
+    public ResponseEntity<List<HelpOffer>> getAllHelpOffers(HelpOfferCriteria criteria) {
+        log.debug("REST request to get HelpOffers by criteria: {}", criteria);
+        List<HelpOffer> entityList = helpOfferQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
+    * GET  /help-offers/count : count all the helpOffers.
+    *
+    * @param criteria the criterias which the requested entities should match
+    * @return the ResponseEntity with status 200 (OK) and the count in body
+    */
+    @GetMapping("/help-offers/count")
+    public ResponseEntity<Long> countHelpOffers(HelpOfferCriteria criteria) {
+        log.debug("REST request to count HelpOffers by criteria: {}", criteria);
+        return ResponseEntity.ok().body(helpOfferQueryService.countByCriteria(criteria));
     }
 
     /**
@@ -92,7 +111,7 @@ public class HelpOfferResource {
     @GetMapping("/help-offers/{id}")
     public ResponseEntity<HelpOffer> getHelpOffer(@PathVariable Long id) {
         log.debug("REST request to get HelpOffer : {}", id);
-        Optional<HelpOffer> helpOffer = helpOfferRepository.findById(id);
+        Optional<HelpOffer> helpOffer = helpOfferService.findOne(id);
         return ResponseUtil.wrapOrNotFound(helpOffer);
     }
 
@@ -105,7 +124,7 @@ public class HelpOfferResource {
     @DeleteMapping("/help-offers/{id}")
     public ResponseEntity<Void> deleteHelpOffer(@PathVariable Long id) {
         log.debug("REST request to delete HelpOffer : {}", id);
-        helpOfferRepository.deleteById(id);
+        helpOfferService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

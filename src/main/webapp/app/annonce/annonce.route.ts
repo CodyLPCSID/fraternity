@@ -1,12 +1,17 @@
 import { Route } from '@angular/router';
+import { AnnonceComponent } from 'app/annonce/annonce.component';
+import { UserMgmtComponent } from 'app/admin';
+import { JhiResolvePagingParams } from 'ng-jhipster';
 
-import { HomeComponent } from './';
-
-export const HOME_ROUTE: Route = {
-    path: '',
-    component: HomeComponent,
+export const ANNONCE_ROUTE: Route = {
+    path: 'annonces',
+    component: AnnonceComponent,
+    resolve: {
+        pagingParams: JhiResolvePagingParams
+    },
     data: {
         authorities: [],
-        pageTitle: 'home.title'
+        pageTitle: 'annonce.title',
+        defaultSort: 'id,asc'
     }
 };
