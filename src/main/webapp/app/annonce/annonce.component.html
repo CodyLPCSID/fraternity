@@ -15,7 +15,6 @@
     </form>
 </div>
 
-<div *ngIf="helpOffers">
   <div *ngFor="let helpOffer of helpOffers ;trackBy: trackId">
       <div class="card text-center" style="margin-top: 30px">
           <div class="card-header">
@@ -36,12 +35,12 @@
           </div>
       </div>
   </div>
-  
+
+<div *ngIf="helpOffers">
   <div class="row justify-content-center">
       <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
   </div>
   <div class="row justify-content-center">
       <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
   </div>
-  <p>{{totalItems}}</p>
 </div>
