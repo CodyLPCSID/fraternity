@@ -10,7 +10,7 @@
                     </option>
                 </select>
             </div>
-                <button (click)="search()" type="submit" class="btn btn-outline-primary"> Search</button>
+                <button (click)="search()" type="submit" class="btn btn-outline-primary">Search</button>
         </div>
     </form>
 </div>
@@ -22,7 +22,7 @@
           </div>
           <div class="card-body">
               <h4 class="card-text">{{helpOffer.description}}</h4>
-              <p class="card-text text-muted">De {{helpOffer.dateStart | date:'mediumDate'}}
+              <p class="card-text text-muted">Du {{helpOffer.dateStart | date:'mediumDate'}}
                   à {{helpOffer.dateEnd | date:'mediumDate'}}</p>
               <!--                    <div *ngIf="helpOffer.helpO">-->
               <!--                        <a [routerLink]="['../help-action', helpOffer.helpO?.id, 'view' ]">{{helpOffer.helpO?.id}}</a>-->
