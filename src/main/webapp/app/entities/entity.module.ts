@@ -51,6 +51,10 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'association',
                 loadChildren: './association/association.module#FraternityAssociationModule'
+            },
+            {
+                path: 'category',
+                loadChildren: './category/category.module#FraternityCategoryModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])
