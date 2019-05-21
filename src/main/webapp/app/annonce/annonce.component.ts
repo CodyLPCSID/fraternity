@@ -32,7 +32,8 @@ export class AnnonceComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-    selectedCat: string;
+    selectedCat: number;
+    datePick: any;
 
     constructor(
         protected helpOfferService: HelpOfferService,
@@ -68,12 +69,16 @@ export class AnnonceComponent implements OnInit, OnDestroy {
     }
 
     search() {
-        this.loadAllSearch(Number(this.selectedCat));
+        console.log('date pick : ' + this.datePick);
+        this.loadAllSearch(this.selectedCat);
     }
 
     loadAllSearch(cat: number) {
         this.helpOfferService
             .query({
+                page: this.page - 1,
+                size: this.itemsPerPage,
+                sort: this.sort(),
                 'categoryId.equals': cat
             })
             .pipe(
@@ -90,6 +95,7 @@ export class AnnonceComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
+        this.selectedCat = 0;
         this.helpOfferService
             .query({
                 page: this.page - 1,

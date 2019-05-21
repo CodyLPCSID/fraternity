@@ -1,45 +1,124 @@
-<div class="d-flex justify-content-center"><h1> ANNONCES </h1></div>
-<div class="container">
-    <form>
-        <div class="form-group row">
-            <label for="category" class="col-sm-2 col-form-label">Category Filter</label>
-            <div class="col-sm-8">
-                <select [(ngModel)]="selectedCat" name="category" id="category" class="form-control">
-                    <option *ngFor="let category of categories ;trackBy: trackId" [value]="category.id">
-                        {{category.typeName}}
-                    </option>
-                </select>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-2">
+            <div class="d-flex justify-content-center"><h2> Filter</h2></div>
+            <div class="card border-info ">
+                <div class="card-body text-info">
+                    <!--filter-->
+                    <div>
+                        <label for="category" class="col">Filter Category</label>
+                        <div class="col">
+                            <select [(ngModel)]="selectedCat" name="category" id="category" class="form-control">
+                                <!--                    <option value="" disabled selected> Cagegory </option>-->
+                                <option *ngFor="let category of categories ;trackBy: trackId" [value]="category.id">
+                                    {{category.typeName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="date" class="col">Date</label>
+                        <div class="input-group col">
+                            <input type="text" class="form-control" name="date" id="date"
+                                   ngbDatepicker #date="ngbDatepicker" [(ngModel)]="datePick"/>
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-secondary"
+                                        (click)="date.toggle()">
+                                    <fa-icon [icon]="'calendar-alt'"></fa-icon>
+                                </button>
+                    </span>
+                        </div>
+
+                    </div>
+                    <div style="margin-top: 30px">
+                        <button style="margin-left:15px; " (click)="search()" type="submit"
+                                class="btn btn-outline-primary  mb-2">
+                            <fa-icon [icon]="'search'"></fa-icon>
+                            Search
+                        </button>
+                        <button style="margin-left:15px; " (click)="loadAll()" type="submit"
+                                class="btn btn-outline-danger  mb-2">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            Reset
+                        </button>
+                    </div>
+
+
+                    <!--End Filter-->
+                </div>
             </div>
-                <button (click)="search()" type="submit" class="btn btn-outline-primary"> Search</button>
         </div>
-    </form>
+        <div class="col-md-10">
+            <div class="d-flex justify-content-center">
+                <h1> ANNONCES </h1>
+            </div>
+            <div class="container-fluid">
+                <div class="row d-flex justify-content-center">
+                    <div *ngFor="let helpOffer of helpOffers ;trackBy: trackId">
+                        <div class="card-group">
+                            <div class="container">
+                                <div class="card shadow bg-white"
+                                     style="margin-bottom: 30px; display:inline-block; width: 25rem;">
+                                    <img class="card-img-top" src="../../content/images/image_ex.svg" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            {{helpOffer.title}}
+                                        </h5>
+                                        <p class="card-text">
+                                            {{helpOffer.description}}
+                                        </p>
+                                        <a [routerLink]="['/help-offer', helpOffer.id, 'view' ]" class="btn btn-primary">Voir Les détails</a>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">
+                                            Poster le : {{helpOffer.datePost | date:'mediumDate'}} - {{ helpOffer.category.typeName }}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div *ngIf="helpOffers">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage"
+                                    [maxSize]="5"
+                                    [rotate]="true" [boundaryLinks]="true"
+                                    (pageChange)="loadPage(page)"></ngb-pagination>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 
-<div *ngFor="let helpOffer of helpOffers ;trackBy: trackId">
-    <div class="card text-center" style="margin-top: 30px">
-        <div class="card-header">
-            <h3 class="card-title">{{helpOffer.title}}</h3>
-        </div>
-        <div class="card-body">
-            <h4 class="card-text">{{helpOffer.description}}</h4>
-            <p class="card-text text-muted">De {{helpOffer.dateStart | date:'mediumDate'}}
-                à {{helpOffer.dateEnd | date:'mediumDate'}}</p>
-            <!--                    <div *ngIf="helpOffer.helpO">-->
-            <!--                        <a [routerLink]="['../help-action', helpOffer.helpO?.id, 'view' ]">{{helpOffer.helpO?.id}}</a>-->
-            <!--                    </div>-->
-            <a [routerLink]="['/help-offer', helpOffer.id, 'view' ]" class="btn btn-primary">Voir Les
-                détails</a>
-        </div>
-        <div class="card-footer text-muted">
-            Poster le : {{helpOffer.datePost | date:'mediumDate'}}
-        </div>
-    </div>
-</div>
-<div *ngIf="helpOffers">
-    <div class="row justify-content-center">
-        <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-    </div>
-    <div class="row justify-content-center">
-        <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
-    </div>
-</div>
+
+<!--<div *ngFor="let helpOffer of helpOffers ;trackBy: trackId">-->
+<!--    <div class="card text-center" style="margin-bottom: 30px">-->
+<!--        <div class="card-header">-->
+<!--            <h3 class="card-title">{{helpOffer.title}}</h3>-->
+<!--        </div>-->
+<!--        <div class="card-body">-->
+<!--            <h4 class="card-text">{{helpOffer.description}}</h4>-->
+<!--            <p class="card-text text-muted">De {{helpOffer.dateStart | date:'mediumDate'}}-->
+<!--                à {{helpOffer.dateEnd | date:'mediumDate'}}</p>-->
+<!--            &lt;!&ndash;                    <div *ngIf="helpOffer.helpO">&ndash;&gt;-->
+<!--            &lt;!&ndash;                        <a [routerLink]="['../help-action', helpOffer.helpO?.id, 'view' ]">{{helpOffer.helpO?.id}}</a>&ndash;&gt;-->
+<!--            &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--            <a [routerLink]="['/help-offer', helpOffer.id, 'view' ]" class="btn btn-primary">Voir Les-->
+<!--                détails</a>-->
+<!--        </div>-->
+<!--        <div class="card-footer text-muted">-->
+<!--            Poster le : {{helpOffer.datePost | date:'mediumDate'}}-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
