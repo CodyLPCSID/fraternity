@@ -3,11 +3,16 @@ import com.fraternity.fsp.domain.HelpOffer;
 import com.fraternity.fsp.service.HelpOfferService;
 import com.fraternity.fsp.web.rest.errors.BadRequestAlertException;
 import com.fraternity.fsp.web.rest.util.HeaderUtil;
+import com.fraternity.fsp.web.rest.util.PaginationUtil;
 import com.fraternity.fsp.service.dto.HelpOfferCriteria;
 import com.fraternity.fsp.service.HelpOfferQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,14 +85,16 @@ public class HelpOfferResource {
     /**
      * GET  /help-offers : get all the helpOffers.
      *
+     * @param pageable the pagination information
      * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of helpOffers in body
      */
     @GetMapping("/help-offers")
-    public ResponseEntity<List<HelpOffer>> getAllHelpOffers(HelpOfferCriteria criteria) {
+    public ResponseEntity<List<HelpOffer>> getAllHelpOffers(HelpOfferCriteria criteria, Pageable pageable) {
         log.debug("REST request to get HelpOffers by criteria: {}", criteria);
-        List<HelpOffer> entityList = helpOfferQueryService.findByCriteria(criteria);
-        return ResponseEntity.ok().body(entityList);
+        Page<HelpOffer> page = helpOfferQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/help-offers");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**

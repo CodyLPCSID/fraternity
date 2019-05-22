@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { filter, map } from 'rxjs/operators';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { HelpOffer, IHelpOffer } from 'app/shared/model/help-offer.model';
 import { Subscription } from 'rxjs';
 import { HelpOfferService } from 'app/entities/help-offer';
-import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { AccountService } from 'app/core';
 import { Category, ICategory } from 'app/shared/model/category.model';
 import { CategoryService } from 'app/entities/category';
@@ -38,6 +38,7 @@ export class AnnonceComponent implements OnInit, OnDestroy {
     constructor(
         protected helpOfferService: HelpOfferService,
         protected categoryService: CategoryService,
+        protected parseLinks: JhiParseLinks,
         protected jhiAlertService: JhiAlertService,
         protected eventManager: JhiEventManager,
         private router: Router,
@@ -102,14 +103,8 @@ export class AnnonceComponent implements OnInit, OnDestroy {
                 size: this.itemsPerPage,
                 sort: this.sort()
             })
-            .pipe(
-                filter((res: HttpResponse<IHelpOffer[]>) => res.ok),
-                map((res: HttpResponse<IHelpOffer[]>) => res.body)
-            )
             .subscribe(
-                (res: IHelpOffer[]) => {
-                    this.helpOffers = res;
-                },
+                (res: HttpResponse<IHelpOffer[]>) => this.paginateAnnonces(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
@@ -164,6 +159,12 @@ export class AnnonceComponent implements OnInit, OnDestroy {
 
     registerChangeInHelpOffers() {
         this.eventSubscriber = this.eventManager.subscribe('helpOfferListModification', response => this.loadAll());
+    }
+
+    protected paginateAnnonces(data: IHelpOffer[], headers: HttpHeaders) {
+        this.links = this.parseLinks.parse(headers.get('link'));
+        this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
+        this.helpOffers = data;
     }
 
     protected onError(errorMessage: string) {

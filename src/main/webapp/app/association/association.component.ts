@@ -13,7 +13,8 @@ import { AssociationService } from './association.service';
 
 @Component({
     selector: 'jhi-association',
-    templateUrl: './association.component.html'
+    templateUrl: './association.component.html',
+    styleUrls: ['association.component.css']
 })
 export class AssociationComponent implements OnInit, OnDestroy {
     currentAccount: any;
@@ -69,7 +70,7 @@ export class AssociationComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/association'], {
+        this.router.navigate(['/associations'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -82,7 +83,7 @@ export class AssociationComponent implements OnInit, OnDestroy {
     clear() {
         this.page = 0;
         this.router.navigate([
-            '/association',
+            '/associations',
             {
                 page: this.page,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')

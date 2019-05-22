@@ -1,0 +1,39 @@
+<div>
+  <h2 id="page-heading">
+    <span>Les associations</span>
+    <!-- <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-association" [routerLink]="['/association/new']">
+        <fa-icon [icon]="'plus'"></fa-icon>
+        <span>
+        Ajouter une nouvelle association
+        </span>
+    </button> -->
+  </h2>
+
+  <div *ngIf="associations">
+      <div class="association" *ngFor="let association of associations ;trackBy: trackId">
+        <div class="card text-center" style="margin-top: 30px">
+            <div class="card-header">
+                <h4 class="card-title">Nom de l'association</h4>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Description</p>
+              <p class="card-text text-muted">Status : {{association.statut}}</p>
+            </div>
+            <div class="card-footer text-muted">
+                Numéro de Siret : {{association.nSiret}}
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+    </div>
+    <div class="row justify-content-center">
+        <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+    </div>
+
+  </div>
+
+
+
+</div>

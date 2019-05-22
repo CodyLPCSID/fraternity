@@ -57,5 +57,5 @@
     "entityTableName": "help_offer",
     "databaseType": "sql",
     "jpaMetamodelFiltering": true,
-    "pagination": "no"
+    "pagination": "pagination"
 }

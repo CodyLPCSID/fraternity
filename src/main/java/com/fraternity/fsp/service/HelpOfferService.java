@@ -5,6 +5,8 @@ import com.fraternity.fsp.repository.HelpOfferRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,12 +44,13 @@ public class HelpOfferService {
     /**
      * Get all the helpOffers.
      *
+     * @param pageable the pagination information
      * @return the list of entities
      */
     @Transactional(readOnly = true)
-    public List<HelpOffer> findAll() {
+    public Page<HelpOffer> findAll(Pageable pageable) {
         log.debug("Request to get all HelpOffers");
-        return helpOfferRepository.findAll();
+        return helpOfferRepository.findAll(pageable);
     }
 
 
