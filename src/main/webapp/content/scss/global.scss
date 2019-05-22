@@ -3,6 +3,10 @@
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: white;
+}
 
 body,
 h1,
@@ -85,6 +89,7 @@ Generic styles
 
 .footer {
     border-top: 1px solid rgba(0, 0, 0, 0.125);
+    margin-top: 30px;
 }
 
 .hand,

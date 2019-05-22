@@ -18,6 +18,7 @@ import { FraternityHomeModule } from './home/home.module';
 import { FraternityAccountModule } from './account/account.module';
 import { FraternityEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
+
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 import { HomeActionModule } from 'app/home-action/home-action.module';

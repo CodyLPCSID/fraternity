@@ -3,9 +3,16 @@ import { RouterModule } from '@angular/router';
 
 import { FraternitySharedModule } from 'app/shared';
 import { HOME_ROUTE, HomeComponent } from './';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
-    imports: [FraternitySharedModule, RouterModule.forChild([HOME_ROUTE])],
+    imports: [
+        FraternitySharedModule,
+        RouterModule.forChild([HOME_ROUTE]),
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyDZqKzmezcDpiI5zUvqxDfA0JTSMhJFFp8'
+        })
+    ],
     declarations: [HomeComponent],
     schemas: []
 })

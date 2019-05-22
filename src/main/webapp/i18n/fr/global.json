@@ -37,6 +37,11 @@
                 "database": "Base de données",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
+            "action": {
+                "main": "Action",
+                "addOffer": "Apporter votre aide ",
+                "addRequest": "Demander de l'aide"
+            },
             "language": "Langue"
         },
         "form": {
