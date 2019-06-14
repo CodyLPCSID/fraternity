@@ -40,6 +40,13 @@ public class HelpOffer implements Serializable {
     @Column(name = "date_end")
     private LocalDate dateEnd;
 
+    @Lob
+    @Column(name = "picture")
+    private byte[] picture;
+
+    @Column(name = "picture_content_type")
+    private String pictureContentType;
+
     @ManyToOne
     @JsonIgnoreProperties("helpOffers")
     private HelpAction helpO;
@@ -126,6 +133,32 @@ public class HelpOffer implements Serializable {
         this.dateEnd = dateEnd;
     }
 
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public HelpOffer picture(byte[] picture) {
+        this.picture = picture;
+        return this;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
+    }
+
+    public String getPictureContentType() {
+        return pictureContentType;
+    }
+
+    public HelpOffer pictureContentType(String pictureContentType) {
+        this.pictureContentType = pictureContentType;
+        return this;
+    }
+
+    public void setPictureContentType(String pictureContentType) {
+        this.pictureContentType = pictureContentType;
+    }
+
     public HelpAction getHelpO() {
         return helpO;
     }
@@ -195,6 +228,8 @@ public class HelpOffer implements Serializable {
             ", datePost='" + getDatePost() + "'" +
             ", dateStart='" + getDateStart() + "'" +
             ", dateEnd='" + getDateEnd() + "'" +
+            ", picture='" + getPicture() + "'" +
+            ", pictureContentType='" + getPictureContentType() + "'" +
             "}";
     }
 }

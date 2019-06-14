@@ -25,6 +25,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
@@ -62,6 +63,11 @@ public class HelpOfferResourceIntTest {
 
     private static final LocalDate DEFAULT_DATE_END = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE_END = LocalDate.now(ZoneId.systemDefault());
+
+    private static final byte[] DEFAULT_PICTURE = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_PICTURE = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_PICTURE_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_PICTURE_CONTENT_TYPE = "image/png";
 
     @Autowired
     private HelpOfferRepository helpOfferRepository;
@@ -115,7 +121,9 @@ public class HelpOfferResourceIntTest {
             .description(DEFAULT_DESCRIPTION)
             .datePost(DEFAULT_DATE_POST)
             .dateStart(DEFAULT_DATE_START)
-            .dateEnd(DEFAULT_DATE_END);
+            .dateEnd(DEFAULT_DATE_END)
+            .picture(DEFAULT_PICTURE)
+            .pictureContentType(DEFAULT_PICTURE_CONTENT_TYPE);
         return helpOffer;
     }
 
@@ -144,6 +152,8 @@ public class HelpOfferResourceIntTest {
         assertThat(testHelpOffer.getDatePost()).isEqualTo(DEFAULT_DATE_POST);
         assertThat(testHelpOffer.getDateStart()).isEqualTo(DEFAULT_DATE_START);
         assertThat(testHelpOffer.getDateEnd()).isEqualTo(DEFAULT_DATE_END);
+        assertThat(testHelpOffer.getPicture()).isEqualTo(DEFAULT_PICTURE);
+        assertThat(testHelpOffer.getPictureContentType()).isEqualTo(DEFAULT_PICTURE_CONTENT_TYPE);
     }
 
     @Test
@@ -180,7 +190,9 @@ public class HelpOfferResourceIntTest {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].datePost").value(hasItem(DEFAULT_DATE_POST.toString())))
             .andExpect(jsonPath("$.[*].dateStart").value(hasItem(DEFAULT_DATE_START.toString())))
-            .andExpect(jsonPath("$.[*].dateEnd").value(hasItem(DEFAULT_DATE_END.toString())));
+            .andExpect(jsonPath("$.[*].dateEnd").value(hasItem(DEFAULT_DATE_END.toString())))
+            .andExpect(jsonPath("$.[*].pictureContentType").value(hasItem(DEFAULT_PICTURE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].picture").value(hasItem(Base64Utils.encodeToString(DEFAULT_PICTURE))));
     }
     
     @Test
@@ -198,7 +210,9 @@ public class HelpOfferResourceIntTest {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.datePost").value(DEFAULT_DATE_POST.toString()))
             .andExpect(jsonPath("$.dateStart").value(DEFAULT_DATE_START.toString()))
-            .andExpect(jsonPath("$.dateEnd").value(DEFAULT_DATE_END.toString()));
+            .andExpect(jsonPath("$.dateEnd").value(DEFAULT_DATE_END.toString()))
+            .andExpect(jsonPath("$.pictureContentType").value(DEFAULT_PICTURE_CONTENT_TYPE))
+            .andExpect(jsonPath("$.picture").value(Base64Utils.encodeToString(DEFAULT_PICTURE)));
     }
 
     @Test
@@ -545,7 +559,9 @@ public class HelpOfferResourceIntTest {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].datePost").value(hasItem(DEFAULT_DATE_POST.toString())))
             .andExpect(jsonPath("$.[*].dateStart").value(hasItem(DEFAULT_DATE_START.toString())))
-            .andExpect(jsonPath("$.[*].dateEnd").value(hasItem(DEFAULT_DATE_END.toString())));
+            .andExpect(jsonPath("$.[*].dateEnd").value(hasItem(DEFAULT_DATE_END.toString())))
+            .andExpect(jsonPath("$.[*].pictureContentType").value(hasItem(DEFAULT_PICTURE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].picture").value(hasItem(Base64Utils.encodeToString(DEFAULT_PICTURE))));
 
         // Check, that the count call also returns 1
         restHelpOfferMockMvc.perform(get("/api/help-offers/count?sort=id,desc&" + filter))
@@ -597,7 +613,9 @@ public class HelpOfferResourceIntTest {
             .description(UPDATED_DESCRIPTION)
             .datePost(UPDATED_DATE_POST)
             .dateStart(UPDATED_DATE_START)
-            .dateEnd(UPDATED_DATE_END);
+            .dateEnd(UPDATED_DATE_END)
+            .picture(UPDATED_PICTURE)
+            .pictureContentType(UPDATED_PICTURE_CONTENT_TYPE);
 
         restHelpOfferMockMvc.perform(put("/api/help-offers")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -613,6 +631,8 @@ public class HelpOfferResourceIntTest {
         assertThat(testHelpOffer.getDatePost()).isEqualTo(UPDATED_DATE_POST);
         assertThat(testHelpOffer.getDateStart()).isEqualTo(UPDATED_DATE_START);
         assertThat(testHelpOffer.getDateEnd()).isEqualTo(UPDATED_DATE_END);
+        assertThat(testHelpOffer.getPicture()).isEqualTo(UPDATED_PICTURE);
+        assertThat(testHelpOffer.getPictureContentType()).isEqualTo(UPDATED_PICTURE_CONTENT_TYPE);
     }
 
     @Test

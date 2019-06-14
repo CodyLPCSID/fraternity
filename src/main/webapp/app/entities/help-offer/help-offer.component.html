@@ -20,6 +20,7 @@
             <th><span jhiTranslate="fraternityApp.helpOffer.datePost">Date Post</span></th>
             <th><span jhiTranslate="fraternityApp.helpOffer.dateStart">Date Start</span></th>
             <th><span jhiTranslate="fraternityApp.helpOffer.dateEnd">Date End</span></th>
+            <th><span jhiTranslate="fraternityApp.helpOffer.picture">Picture</span></th>
             <th><span jhiTranslate="fraternityApp.helpOffer.helpO">Help O</span></th>
             <th><span jhiTranslate="fraternityApp.helpOffer.user">User</span></th>
             <th><span jhiTranslate="fraternityApp.helpOffer.category">Category</span></th>
@@ -34,6 +35,12 @@
                 <td>{{helpOffer.datePost | date:'mediumDate'}}</td>
                 <td>{{helpOffer.dateStart | date:'mediumDate'}}</td>
                 <td>{{helpOffer.dateEnd | date:'mediumDate'}}</td>
+                <td>
+                    <a *ngIf="helpOffer.picture" (click)="openFile(helpOffer.pictureContentType, helpOffer.picture)">
+                        <img [src]="'data:' + helpOffer.pictureContentType + ';base64,' + helpOffer.picture" style="max-height: 30px;" alt="helpOffer image"/>
+                    </a>
+                    <span *ngIf="helpOffer.picture">{{helpOffer.pictureContentType}}, {{byteSize(helpOffer.picture)}}</span>
+                </td>
                 <td>
                     <div *ngIf="helpOffer.helpO">
                         <a [routerLink]="['../help-action', helpOffer.helpO?.id, 'view' ]" >{{helpOffer.helpO?.id}}</a>

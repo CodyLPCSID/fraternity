@@ -42,6 +42,13 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="picture" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="picture_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="helpo_id" type="bigint">
                 <constraints nullable="true" />
             </column>

@@ -8,8 +8,9 @@ import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 import { AccountService } from 'app/core';
 import { Category, ICategory } from 'app/shared/model/category.model';
 import { CategoryService } from 'app/entities/category';
-import { ITEMS_PER_PAGE } from 'app/shared';
+import { DATE_FORMAT, ITEMS_PER_PAGE } from 'app/shared';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Moment } from 'moment';
 
 @Component({
     selector: 'jhi-annonce',
@@ -33,7 +34,8 @@ export class AnnonceComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
     selectedCat: number;
-    datePick: any;
+    datePickMin: any;
+    datePickMax: any;
 
     constructor(
         protected helpOfferService: HelpOfferService,
@@ -69,17 +71,23 @@ export class AnnonceComponent implements OnInit, OnDestroy {
     }
 
     search() {
-        console.log('date pick : ' + this.datePick);
-        this.loadAllSearch(this.selectedCat);
+        this.loadAllSearch(this.selectedCat, this.datePickMin, this.datePickMax);
     }
 
-    loadAllSearch(cat: number) {
+    loadAllSearch(cat: number, dateMin: Moment, dateMax: Moment) {
+        // helpOffer.datePost.format(DATE_FORMAT);
+
+        console.log('dateMin format :' + dateMin.format(DATE_FORMAT));
+        console.log('dateMax format :' + dateMax.format(DATE_FORMAT));
+
         this.helpOfferService
             .query({
                 page: this.page - 1,
                 size: this.itemsPerPage,
                 sort: this.sort(),
-                'categoryId.equals': cat
+                'categoryId.equals': cat,
+                'datePost.greaterOrEqualThan': dateMin.format(DATE_FORMAT),
+                'datePost.lessOrEqualThan': dateMax.format(DATE_FORMAT)
             })
             .pipe(
                 filter((res: HttpResponse<IHelpOffer[]>) => res.ok),

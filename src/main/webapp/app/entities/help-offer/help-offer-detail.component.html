@@ -25,6 +25,15 @@
                 <dd>
                     <span>{{helpOffer.dateEnd}}</span>
                 </dd>
+                <dt><span jhiTranslate="fraternityApp.helpOffer.picture">Picture</span></dt>
+                <dd>
+                    <div *ngIf="helpOffer.picture">
+                        <a (click)="openFile(helpOffer.pictureContentType, helpOffer.picture)">
+                            <img [src]="'data:' + helpOffer.pictureContentType + ';base64,' + helpOffer.picture" style="max-width: 100%;" alt="helpOffer image"/>
+                        </a>
+                        {{helpOffer.pictureContentType}}, {{byteSize(helpOffer.picture)}}
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="fraternityApp.helpOffer.helpO">Help O</span></dt>
                 <dd>
                     <div *ngIf="helpOffer.helpO">

@@ -13,8 +13,8 @@ export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
 
-    lat: number = 51.678418;
-    lng: number = 7.809007;
+    lat: number = 48.856614;
+    lng: number = 2.3522219;
 
     constructor(
         private accountService: AccountService,

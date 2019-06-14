@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { JhiAlertService } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IHelpOffer } from 'app/shared/model/help-offer.model';
 import { HelpOfferService } from './help-offer.service';
 import { IHelpAction } from 'app/shared/model/help-action.model';
@@ -31,11 +31,13 @@ export class HelpOfferUpdateComponent implements OnInit {
     dateEndDp: any;
 
     constructor(
+        protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
         protected helpOfferService: HelpOfferService,
         protected helpActionService: HelpActionService,
         protected userService: UserService,
         protected categoryService: CategoryService,
+        protected elementRef: ElementRef,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -65,6 +67,22 @@ export class HelpOfferUpdateComponent implements OnInit {
                 map((response: HttpResponse<ICategory[]>) => response.body)
             )
             .subscribe((res: ICategory[]) => (this.categories = res), (res: HttpErrorResponse) => this.onError(res.message));
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
+
+    setFileData(event, entity, field, isImage) {
+        this.dataUtils.setFileData(event, entity, field, isImage);
+    }
+
+    clearInputImage(field: string, fieldContentType: string, idInput: string) {
+        this.dataUtils.clearInputImage(this.helpOffer, this.elementRef, field, fieldContentType, idInput);
     }
 
     previousState() {

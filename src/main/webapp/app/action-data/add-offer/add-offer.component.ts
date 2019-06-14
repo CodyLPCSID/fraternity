@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { AddOfferService } from '../add-offer/add-offer.service';
 import { IHelpOffer } from 'app/shared/model/help-offer.model';
 import { Observable, Subscription } from 'rxjs';
 import { HelpOfferService } from 'app/entities/help-offer';
-import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils, JhiEventManager } from 'ng-jhipster';
 import { Account, AccountService, IUser, UserService } from 'app/core';
 import { filter, map } from 'rxjs/operators';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
@@ -12,6 +12,7 @@ import { ICategory } from 'app/shared/model/category.model';
 import { HelpActionService } from 'app/entities/help-action';
 import { CategoryService } from 'app/entities/category';
 import { ActivatedRoute } from '@angular/router';
+import moment = require('moment');
 
 @Component({
     selector: 'jhi-add-offer',
@@ -19,6 +20,8 @@ import { ActivatedRoute } from '@angular/router';
     styles: []
 })
 export class AddOfferComponent implements OnInit {
+    fileData: File = null;
+
     account: Account;
     public isCollapsed = false;
 
@@ -35,11 +38,13 @@ export class AddOfferComponent implements OnInit {
     dateEndDp: any;
 
     constructor(
+        protected dataUtils: JhiDataUtils,
         private accountService: AccountService,
         protected jhiAlertService: JhiAlertService,
         protected helpOfferService: HelpOfferService,
         protected helpActionService: HelpActionService,
         protected userService: UserService,
+        protected elementRef: ElementRef,
         protected categoryService: CategoryService,
         protected activatedRoute: ActivatedRoute
     ) {}
@@ -77,6 +82,34 @@ export class AddOfferComponent implements OnInit {
             .subscribe((res: ICategory[]) => (this.categories = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
+    handleFileInput(files: FileList) {
+        this.fileData = files.item(0);
+        console.log((this.fileData = files.item(0)));
+    }
+
+    // uploadFileToActivity() {
+    //     this.helpOfferService.postFile(this.helpOfferService).subscribe(data => {
+    //
+    //     }, error => {
+    //         console.log(error);
+    //     });
+    // }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    setFileData(event, entity, field, isImage) {
+        this.dataUtils.setFileData(event, entity, field, isImage);
+    }
+
+    clearInputImage(field: string, fieldContentType: string, idInput: string) {
+        this.dataUtils.clearInputImage(this.helpOffer, this.elementRef, field, fieldContentType, idInput);
+    }
+
     previousState() {
         window.history.back();
     }
@@ -90,7 +123,7 @@ export class AddOfferComponent implements OnInit {
         }
     }
     save() {
-        let today = new Date();
+        const today = new Date();
         this.datePostDp = today;
         console.log('date' + today);
         this.isSaving = true;

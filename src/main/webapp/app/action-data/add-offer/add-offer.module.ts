@@ -4,10 +4,10 @@ import { AddOfferComponent } from 'app/action-data/add-offer/add-offer.component
 import { RouterModule } from '@angular/router';
 import { FraternitySharedModule } from 'app/shared';
 import { addOfferRoute } from 'app/action-data/add-offer/add-offer.route';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
     declarations: [AddOfferComponent],
-    imports: [FraternitySharedModule, RouterModule.forRoot([addOfferRoute]), CommonModule],
+    imports: [HttpClientModule, FraternitySharedModule, RouterModule.forRoot([addOfferRoute]), CommonModule],
     exports: [AddOfferComponent]
 })
 export class AddOfferModule {}

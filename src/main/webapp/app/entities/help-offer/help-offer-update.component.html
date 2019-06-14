@@ -49,6 +49,23 @@
                         </span>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="fraternityApp.helpOffer.picture" for="field_picture">Picture</label>
+                    <div>
+                        <img [src]="'data:' + helpOffer.pictureContentType + ';base64,' + helpOffer.picture" style="max-height: 100px;" *ngIf="helpOffer.picture" alt="helpOffer image"/>
+                        <div *ngIf="helpOffer.picture" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{helpOffer.pictureContentType}}, {{byteSize(helpOffer.picture)}}</span>
+                            <button type="button" (click)="clearInputImage('picture', 'pictureContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_picture" (change)="setFileData($event, helpOffer, 'picture', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="picture" id="field_picture"
+                        [(ngModel)]="helpOffer.picture" />
+                    <input type="hidden" class="form-control" name="pictureContentType" id="field_pictureContentType"
+                        [(ngModel)]="helpOffer.pictureContentType" />
+                </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="fraternityApp.helpOffer.helpO" for="field_helpO">Help O</label>

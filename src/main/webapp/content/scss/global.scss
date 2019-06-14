@@ -89,7 +89,36 @@ Generic styles
 
 .footer {
     border-top: 1px solid rgba(0, 0, 0, 0.125);
-    margin-top: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-image: linear-gradient(#5614ba, #0f52ba);
+}
+
+footer p {
+    color: white;
+    a {
+        color: white;
+    }
+}
+
+.scroll_text {
+    height: 600px;
+    overflow: auto;
+    padding: 0px 15px;
+}
+.scroll_text::-webkit-scrollbar {
+    width: 2px;
+}
+.scroll_text::-webkit-scrollbar-track {
+    background-color: #e7e7e7;
+}
+.scroll_text::-webkit-scrollbar-thumb {
+    background-color: rgba(223, 86, 86, 0.69);
+    border: 1px solid rgba(92, 92, 92, 0.5);
+    border-radius: 10px;
+}
+.scroll_text::-webkit-scrollbar-thumb:hover {
+    background-color: #000;
 }
 
 .hand,

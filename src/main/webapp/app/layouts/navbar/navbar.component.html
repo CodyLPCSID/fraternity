@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light navbar-expand-md bg-nav shadow-sm rounded ">
+<nav class="navbar navbar-dark navbar-expand-md bg-nav shadow-sm rounded ">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
         <span class="logo-img align-middle"></span>
         <span jhiTranslate="global.title" class="navbar-title align-middle" style="font-size: 30px;">Fraternity</span>
@@ -108,6 +108,12 @@
                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.category">Category</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="help-offer" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.helpOffer">Help Offer</span>
                         </a>
                     </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->

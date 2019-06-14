@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,13 +69,5 @@ public class HelpOfferService {
     public void delete(Long id) {
         log.debug("Request to delete HelpOffer : {}", id);
         helpOfferRepository.deleteById(id);
-    }
-
-
-    public void intervale(LocalDate dateStart, LocalDate dateEnd){
-        log.debug("Request to delete dateEnd : {}", dateEnd );
-        log.debug("Request to delete dateStart : {}", dateStart);
-        helpOfferRepository.findAllByDateStartGreaterThanEqualAndDateEndLessThanEqual(dateStart, dateEnd);
-
     }
 }

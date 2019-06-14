@@ -10,6 +10,8 @@ export interface IHelpOffer {
     datePost?: Moment;
     dateStart?: Moment;
     dateEnd?: Moment;
+    pictureContentType?: string;
+    picture?: any;
     helpO?: IHelpAction;
     user?: IUser;
     category?: ICategory;
@@ -23,6 +25,8 @@ export class HelpOffer implements IHelpOffer {
         public datePost?: Moment,
         public dateStart?: Moment,
         public dateEnd?: Moment,
+        public pictureContentType?: string,
+        public picture?: any,
         public helpO?: IHelpAction,
         public user?: IUser,
         public category?: ICategory

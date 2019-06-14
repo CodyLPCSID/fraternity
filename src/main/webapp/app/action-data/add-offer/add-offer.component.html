@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-help-offer-heading">Créer une Annonces pour venir en aide à des personnes
+            <h2 id="jhi-help-offer-heading" *ngIf="account">Créer une Annonces pour venir en aide à des personnes
                 - {{account.login}}</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -21,16 +21,56 @@
                     <input type="text" class="form-control" name="description" id="field_description"
                            [(ngModel)]="helpOffer.description"/>
                 </div>
+
                 <!--                <div class="form-group">-->
-                <!--                    <label class="form-control-label" jhiTranslate="fraternityApp.helpOffer.datePost" for="field_datePost">Date Post</label>-->
-                <!--                    <div class="input-group">-->
-                <!--                        <input id="field_datePost" type="text" class="form-control" name="datePost" ngbDatepicker  #datePostDp="ngbDatepicker" [(ngModel)]="helpOffer.datePost"-->
-                <!--                        />-->
-                <!--                        <span class="input-group-append">-->
-                <!--                            <button type="button" class="btn btn-secondary" (click)="datePostDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>-->
-                <!--                        </span>-->
+                <!--                    <label jhiTranslate="fraternityApp.helpOffer.picture"-->
+                <!--                           for="picture">Picture</label>-->
+                <!--                    <div class="custom-file">-->
+                <!--                        <input type="file"  class="form-control-file" name="picture" id="picture" (change)="handleFileInput($event.target.files)"-->
+                <!--                               [(ngModel)]="helpOffer.picture"/>-->
+                <!--                        <label class="custom-file-label" for="picture">Choose file</label>-->
                 <!--                    </div>-->
                 <!--                </div>-->
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="fraternityApp.helpOffer.picture"
+                           for="field_picture">Picture</label>
+                    <div>
+                        <img [src]="'data:' + helpOffer.pictureContentType + ';base64,' + helpOffer.picture"
+                             style="max-height: 100px;" *ngIf="helpOffer.picture" alt="helpOffer image"/>
+                        <div *ngIf="helpOffer.picture" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{helpOffer.pictureContentType}}
+                                , {{byteSize(helpOffer.picture)}}</span>
+                            <button type="button"
+                                    (click)="clearInputImage('picture', 'pictureContentType', 'fileImage')"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_picture" (change)="setFileData($event, helpOffer, 'picture', true)"
+                               accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="picture" id="field_picture"
+                           [(ngModel)]="helpOffer.picture"/>
+                    <input type="hidden" class="form-control" name="pictureContentType" id="field_pictureContentType"
+                           [(ngModel)]="helpOffer.pictureContentType"/>
+                </div>
+
+
+                <div class="form-group" [hidden]="!helpOffer.datePost">
+                    <label class="form-control-label" jhiTranslate="fraternityApp.helpOffer.datePost"
+                           for="field_datePost">Date Post</label>
+                    <div class="input-group">
+                        <input id="field_datePost" type="text" class="form-control" name="datePost" ngbDatepicker
+                               #datePostDp="ngbDatepicker" [(ngModel)]="helpOffer.datePost"
+                        />
+                        <span class="input-group-append">
+                                            <button type="button" class="btn btn-secondary"
+                                                    (click)="datePostDp.toggle()"><fa-icon
+                                                [icon]="'calendar-alt'"></fa-icon></button>
+                                        </span>
+                    </div>
+                </div>
 
 
                 <div class="form-group">
@@ -90,9 +130,11 @@
                                            for="field_dateEnd">Date End</label>
                                     <div class="input-group">
                                         <input id="field_dateEnd" type="text" class="form-control" name="dateEnd"
-                                               ngbDatepicker #dateEndDp="ngbDatepicker" [(ngModel)]="helpOffer.dateEnd"/>
+                                               ngbDatepicker #dateEndDp="ngbDatepicker"
+                                               [(ngModel)]="helpOffer.dateEnd"/>
                                         <span class="input-group-append">
-                                            <button type="button" class="btn btn-secondary" (click)="dateEndDp.toggle()">
+                                            <button type="button" class="btn btn-secondary"
+                                                    (click)="dateEndDp.toggle()">
                                                 <fa-icon [icon]="'calendar-alt'"></fa-icon>
                                             </button>
                                         </span>

@@ -25,7 +25,7 @@
             "relationshipType": "many-to-one",
             "otherEntityField": "id",
             "otherEntityRelationshipName": "helpOffer",
-            "otherEntityRelationshipNameUndefined": true
+            "otherEntityRelationshipNameUndefined": false
         }
     ],
     "fields": [
@@ -48,6 +48,11 @@
         {
             "fieldName": "dateEnd",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "picture",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
         }
     ],
     "changelogDate": "20190404080711",

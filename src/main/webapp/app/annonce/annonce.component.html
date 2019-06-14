@@ -19,16 +19,28 @@
                     </div>
 
                     <div>
-                        <label for="date" class="col">Date</label>
+                        <label for="dateMin" class="col">Date Min</label>
                         <div class="input-group col">
-                            <input type="text" class="form-control" name="date" id="date"
-                                   ngbDatepicker #date="ngbDatepicker" [(ngModel)]="datePick"/>
+                            <input type="text" class="form-control" name="date" id="dateMin"
+                                   ngbDatepicker #dateMin="ngbDatepicker" [(ngModel)]="datePickMin"/>
                             <span class="input-group-append">
                                 <button type="button" class="btn btn-secondary"
-                                        (click)="date.toggle()">
+                                        (click)="dateMin.toggle()">
                                     <fa-icon [icon]="'calendar-alt'"></fa-icon>
                                 </button>
-                    </span>
+                             </span>
+                        </div>
+
+                        <label for="dateMax" class="col">Date Max</label>
+                        <div class="input-group col">
+                            <input type="text" class="form-control" name="date" id="dateMax"
+                                   ngbDatepicker #dateMax="ngbDatepicker" [(ngModel)]="datePickMax"/>
+                            <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary"
+                                    (click)="dateMax.toggle()">
+                                <fa-icon [icon]="'calendar-alt'"></fa-icon>
+                            </button>
+                         </span>
                         </div>
 
                     </div>
@@ -61,7 +73,10 @@
                             <div class="container">
                                 <div class="card shadow bg-white"
                                      style="margin-bottom: 30px; display:inline-block; width: 25rem;">
-                                    <img class="card-img-top" src="../../content/images/image_vetement.jpg" alt="Card image cap">
+                                    <!--                                    <img  src="../../content/images/image_vetement.jpg"-->
+                                    <img class="card-img-top"
+                                         [src]="'data:' + helpOffer.pictureContentType + ';base64,' + helpOffer.picture"
+                                         alt="helpOffer image">
                                     <div class="card-body">
                                         <h5 class="card-title">
                                             {{helpOffer.title}}
@@ -69,11 +84,13 @@
                                         <p class="card-text">
                                             {{helpOffer.description}}
                                         </p>
-                                        <a [routerLink]="['/help-offer', helpOffer.id, 'view' ]" class="btn btn-primary">Voir Les détails</a>
+                                        <a [routerLink]="['/help-offer', helpOffer.id, 'view' ]"
+                                           class="btn btn-primary">Voir Les détails</a>
                                     </div>
                                     <div class="card-footer">
                                         <small class="text-muted">
-                                            Poster le : {{helpOffer.datePost | date:'mediumDate'}} - {{ helpOffer.category.typeName }}
+                                            Poster le : {{helpOffer.datePost | date:'mediumDate'}}
+                                            - {{ helpOffer.category.typeName }}
                                         </small>
                                     </div>
                                 </div>
