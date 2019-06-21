@@ -1,0 +1,38 @@
+<div class="nav justify-content-center">
+    <h1>
+        {{helpOffer.title}}
+    </h1>
+</div>
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="message">Votre message</label>
+            <textarea rows="3" class="form-control" id="message" placeholder="Texte..." #box (keyup)="onKey(box.value)" ></textarea>
+        </div>
+        <div class="nav justify-content-center">
+            <button class="btn btn-outline-primary" (click)="openVerticallyCentered(content)">Envoyer</button>
+            <button class="btn btn-outline-danger" routerLink="/annonces" style="margin-left: 10px;"> Annuler</button>
+        </div>
+
+    </form>
+    <div class="space"></div>
+</div>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Sujet : {{helpOffer.title}}</h4>
+    </div>
+    <div class="modal-body">
+        <h5>
+            Votre message a bien été envoyé
+        </h5>
+        <div class="fas fa-check" style="color: limegreen; font-size: 40px; vertical-align: middle; margin-left: 10px">/</div>
+        {{message}}
+    </div>
+    <div class="modal-footer">
+        <button type="button" routerLink="/annonces" class="btn btn-light" (click)="modal.close('Close click')">Fermer
+        </button>
+    </div>
+</ng-template>
+
