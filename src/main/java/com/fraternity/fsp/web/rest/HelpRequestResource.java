@@ -1,11 +1,18 @@
 package com.fraternity.fsp.web.rest;
 import com.fraternity.fsp.domain.HelpRequest;
-import com.fraternity.fsp.repository.HelpRequestRepository;
+import com.fraternity.fsp.service.HelpRequestService;
 import com.fraternity.fsp.web.rest.errors.BadRequestAlertException;
 import com.fraternity.fsp.web.rest.util.HeaderUtil;
+import com.fraternity.fsp.web.rest.util.PaginationUtil;
+import com.fraternity.fsp.service.dto.HelpRequestCriteria;
+import com.fraternity.fsp.service.HelpRequestQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,10 +33,13 @@ public class HelpRequestResource {
 
     private static final String ENTITY_NAME = "helpRequest";
 
-    private final HelpRequestRepository helpRequestRepository;
+    private final HelpRequestService helpRequestService;
 
-    public HelpRequestResource(HelpRequestRepository helpRequestRepository) {
-        this.helpRequestRepository = helpRequestRepository;
+    private final HelpRequestQueryService helpRequestQueryService;
+
+    public HelpRequestResource(HelpRequestService helpRequestService, HelpRequestQueryService helpRequestQueryService) {
+        this.helpRequestService = helpRequestService;
+        this.helpRequestQueryService = helpRequestQueryService;
     }
 
     /**
@@ -45,7 +55,7 @@ public class HelpRequestResource {
         if (helpRequest.getId() != null) {
             throw new BadRequestAlertException("A new helpRequest cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        HelpRequest result = helpRequestRepository.save(helpRequest);
+        HelpRequest result = helpRequestService.save(helpRequest);
         return ResponseEntity.created(new URI("/api/help-requests/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -66,7 +76,7 @@ public class HelpRequestResource {
         if (helpRequest.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        HelpRequest result = helpRequestRepository.save(helpRequest);
+        HelpRequest result = helpRequestService.save(helpRequest);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, helpRequest.getId().toString()))
             .body(result);
@@ -75,12 +85,28 @@ public class HelpRequestResource {
     /**
      * GET  /help-requests : get all the helpRequests.
      *
+     * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of helpRequests in body
      */
     @GetMapping("/help-requests")
-    public List<HelpRequest> getAllHelpRequests() {
-        log.debug("REST request to get all HelpRequests");
-        return helpRequestRepository.findAll();
+    public ResponseEntity<List<HelpRequest>> getAllHelpRequests(HelpRequestCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get HelpRequests by criteria: {}", criteria);
+        Page<HelpRequest> page = helpRequestQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/help-requests");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+    * GET  /help-requests/count : count all the helpRequests.
+    *
+    * @param criteria the criterias which the requested entities should match
+    * @return the ResponseEntity with status 200 (OK) and the count in body
+    */
+    @GetMapping("/help-requests/count")
+    public ResponseEntity<Long> countHelpRequests(HelpRequestCriteria criteria) {
+        log.debug("REST request to count HelpRequests by criteria: {}", criteria);
+        return ResponseEntity.ok().body(helpRequestQueryService.countByCriteria(criteria));
     }
 
     /**
@@ -92,7 +118,7 @@ public class HelpRequestResource {
     @GetMapping("/help-requests/{id}")
     public ResponseEntity<HelpRequest> getHelpRequest(@PathVariable Long id) {
         log.debug("REST request to get HelpRequest : {}", id);
-        Optional<HelpRequest> helpRequest = helpRequestRepository.findById(id);
+        Optional<HelpRequest> helpRequest = helpRequestService.findOne(id);
         return ResponseUtil.wrapOrNotFound(helpRequest);
     }
 
@@ -105,7 +131,7 @@ public class HelpRequestResource {
     @DeleteMapping("/help-requests/{id}")
     public ResponseEntity<Void> deleteHelpRequest(@PathVariable Long id) {
         log.debug("REST request to delete HelpRequest : {}", id);
-        helpRequestRepository.deleteById(id);
+        helpRequestService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

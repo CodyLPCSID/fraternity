@@ -42,10 +42,6 @@ public class HelpRequest implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("helpRequests")
-    private HelpAction helpR;
-
-    @ManyToOne
-    @JsonIgnoreProperties("helpRequests")
     private User user;
 
     @ManyToOne
@@ -124,19 +120,6 @@ public class HelpRequest implements Serializable {
 
     public void setDateEnd(LocalDate dateEnd) {
         this.dateEnd = dateEnd;
-    }
-
-    public HelpAction getHelpR() {
-        return helpR;
-    }
-
-    public HelpRequest helpR(HelpAction helpAction) {
-        this.helpR = helpAction;
-        return this;
-    }
-
-    public void setHelpR(HelpAction helpAction) {
-        this.helpR = helpAction;
     }
 
     public User getUser() {

@@ -17,6 +17,7 @@
             },
             "nSiret": "N Siret",
             "statut": "Statut",
+            "name": "Name",
             "asso": "Asso"
         }
     }

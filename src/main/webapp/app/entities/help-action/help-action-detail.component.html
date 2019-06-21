@@ -5,6 +5,22 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="fraternityApp.helpAction.message">Message</span></dt>
+                <dd>
+                    <span>{{helpAction.message}}</span>
+                </dd>
+                <dt><span jhiTranslate="fraternityApp.helpAction.helpOffer">Help Offer</span></dt>
+                <dd>
+                    <div *ngIf="helpAction.helpOffer">
+                        <a [routerLink]="['/help-offer', helpAction.helpOffer?.id, 'view']">{{helpAction.helpOffer?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="fraternityApp.helpAction.helpRequest">Help Request</span></dt>
+                <dd>
+                    <div *ngIf="helpAction.helpRequest">
+                        <a [routerLink]="['/help-request', helpAction.helpRequest?.id, 'view']">{{helpAction.helpRequest?.id}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

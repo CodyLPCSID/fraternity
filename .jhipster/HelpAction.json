@@ -1,14 +1,36 @@
 {
-    "name": "HelpAction",
-    "fields": [],
-    "relationships": [],
-    "changelogDate": "20190404080713",
-    "entityTableName": "help_action",
-    "dto": "no",
-    "pagination": "no",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
     "fluentMethods": true,
     "clientRootFolder": "",
-    "applications": "*"
+    "relationships": [
+        {
+            "relationshipName": "helpOffer",
+            "otherEntityName": "helpOffer",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "helpAction",
+            "otherEntityRelationshipNameUndefined": true
+        },
+        {
+            "relationshipName": "helpRequest",
+            "otherEntityName": "helpRequest",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "helpAction",
+            "otherEntityRelationshipNameUndefined": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "message",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20190404080713",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "help_action",
+    "databaseType": "sql",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
 }

@@ -49,10 +49,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="helpo_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>

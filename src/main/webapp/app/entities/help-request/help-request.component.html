@@ -13,16 +13,15 @@
     <div class="table-responsive" *ngIf="helpRequests">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="fraternityApp.helpRequest.title">Title</span></th>
-            <th><span jhiTranslate="fraternityApp.helpRequest.description">Description</span></th>
-            <th><span jhiTranslate="fraternityApp.helpRequest.datePost">Date Post</span></th>
-            <th><span jhiTranslate="fraternityApp.helpRequest.dateStart">Date Start</span></th>
-            <th><span jhiTranslate="fraternityApp.helpRequest.dateEnd">Date End</span></th>
-            <th><span jhiTranslate="fraternityApp.helpRequest.helpR">Help R</span></th>
-            <th><span jhiTranslate="fraternityApp.helpRequest.user">User</span></th>
-            <th><span jhiTranslate="fraternityApp.helpRequest.category">Category</span></th>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span jhiTranslate="fraternityApp.helpRequest.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span jhiTranslate="fraternityApp.helpRequest.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="datePost"><span jhiTranslate="fraternityApp.helpRequest.datePost">Date Post</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dateStart"><span jhiTranslate="fraternityApp.helpRequest.dateStart">Date Start</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dateEnd"><span jhiTranslate="fraternityApp.helpRequest.dateEnd">Date End</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="user.login"><span jhiTranslate="fraternityApp.helpRequest.user">User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="category.id"><span jhiTranslate="fraternityApp.helpRequest.category">Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -34,11 +33,6 @@
                 <td>{{helpRequest.datePost | date:'mediumDate'}}</td>
                 <td>{{helpRequest.dateStart | date:'mediumDate'}}</td>
                 <td>{{helpRequest.dateEnd | date:'mediumDate'}}</td>
-                <td>
-                    <div *ngIf="helpRequest.helpR">
-                        <a [routerLink]="['../help-action', helpRequest.helpR?.id, 'view' ]" >{{helpRequest.helpR?.id}}</a>
-                    </div>
-                </td>
                 <td>
                     {{helpRequest.user?.login}}
                 </td>
@@ -74,5 +68,13 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <div *ngIf="helpRequests && helpRequests.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
     </div>
 </div>

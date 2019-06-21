@@ -3,14 +3,6 @@
     "clientRootFolder": "",
     "relationships": [
         {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "helpAction",
-            "otherEntityRelationshipName": "helpRequest",
-            "relationshipName": "helpR",
-            "otherEntityField": "id",
-            "otherEntityRelationshipNameUndefined": false
-        },
-        {
             "relationshipName": "user",
             "otherEntityName": "user",
             "relationshipType": "many-to-one",
@@ -25,7 +17,7 @@
             "relationshipType": "many-to-one",
             "otherEntityField": "id",
             "otherEntityRelationshipName": "helpRequest",
-            "otherEntityRelationshipNameUndefined": true
+            "otherEntityRelationshipNameUndefined": false
         }
     ],
     "fields": [
@@ -57,5 +49,5 @@
     "entityTableName": "help_request",
     "databaseType": "sql",
     "jpaMetamodelFiltering": true,
-    "pagination": "no"
+    "pagination": "pagination"
 }

@@ -25,12 +25,6 @@
                 <dd>
                     <span>{{helpRequest.dateEnd}}</span>
                 </dd>
-                <dt><span jhiTranslate="fraternityApp.helpRequest.helpR">Help R</span></dt>
-                <dd>
-                    <div *ngIf="helpRequest.helpR">
-                        <a [routerLink]="['/help-action', helpRequest.helpR?.id, 'view']">{{helpRequest.helpR?.id}}</a>
-                    </div>
-                </dd>
                 <dt><span jhiTranslate="fraternityApp.helpRequest.user">User</span></dt>
                 <dd>
                     {{helpRequest.user?.login}}

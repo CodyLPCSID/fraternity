@@ -30,6 +30,9 @@ public class Association implements Serializable {
     @Column(name = "statut")
     private String statut;
 
+    @Column(name = "name")
+    private String name;
+
     @ManyToOne
     @JsonIgnoreProperties("associations")
     private AssociationMember asso;
@@ -67,6 +70,19 @@ public class Association implements Serializable {
 
     public void setStatut(String statut) {
         this.statut = statut;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Association name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public AssociationMember getAsso() {
@@ -109,6 +125,7 @@ public class Association implements Serializable {
             "id=" + getId() +
             ", nSiret='" + getnSiret() + "'" +
             ", statut='" + getStatut() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

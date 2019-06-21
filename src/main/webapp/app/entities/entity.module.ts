@@ -63,6 +63,66 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'help-offer',
                 loadChildren: './help-offer/help-offer.module#FraternityHelpOfferModule'
+            },
+            {
+                path: 'location',
+                loadChildren: './location/location.module#FraternityLocationModule'
+            },
+            {
+                path: 'association',
+                loadChildren: './association/association.module#FraternityAssociationModule'
+            },
+            {
+                path: 'location',
+                loadChildren: './location/location.module#FraternityLocationModule'
+            },
+            {
+                path: 'help-offer',
+                loadChildren: './help-offer/help-offer.module#FraternityHelpOfferModule'
+            },
+            {
+                path: 'help-request',
+                loadChildren: './help-request/help-request.module#FraternityHelpRequestModule'
+            },
+            {
+                path: 'help-action',
+                loadChildren: './help-action/help-action.module#FraternityHelpActionModule'
+            },
+            {
+                path: 'help-action',
+                loadChildren: './help-action/help-action.module#FraternityHelpActionModule'
+            },
+            {
+                path: 'help-request',
+                loadChildren: './help-request/help-request.module#FraternityHelpRequestModule'
+            },
+            {
+                path: 'help-request',
+                loadChildren: './help-request/help-request.module#FraternityHelpRequestModule'
+            },
+            {
+                path: 'help-offer',
+                loadChildren: './help-offer/help-offer.module#FraternityHelpOfferModule'
+            },
+            {
+                path: 'help-offer',
+                loadChildren: './help-offer/help-offer.module#FraternityHelpOfferModule'
+            },
+            {
+                path: 'help-offer',
+                loadChildren: './help-offer/help-offer.module#FraternityHelpOfferModule'
+            },
+            {
+                path: 'help-request',
+                loadChildren: './help-request/help-request.module#FraternityHelpRequestModule'
+            },
+            {
+                path: 'help-action',
+                loadChildren: './help-action/help-action.module#FraternityHelpActionModule'
+            },
+            {
+                path: 'help-action',
+                loadChildren: './help-action/help-action.module#FraternityHelpActionModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])

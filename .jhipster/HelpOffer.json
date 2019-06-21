@@ -3,14 +3,6 @@
     "clientRootFolder": "",
     "relationships": [
         {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "helpAction",
-            "otherEntityRelationshipName": "helpOffer",
-            "relationshipName": "helpO",
-            "otherEntityField": "id",
-            "otherEntityRelationshipNameUndefined": false
-        },
-        {
             "relationshipName": "user",
             "otherEntityName": "user",
             "relationshipType": "many-to-one",
@@ -62,5 +54,5 @@
     "entityTableName": "help_offer",
     "databaseType": "sql",
     "jpaMetamodelFiltering": true,
-    "pagination": "no"
+    "pagination": "pagination"
 }

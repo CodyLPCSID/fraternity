@@ -7,8 +7,6 @@ import * as moment from 'moment';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IHelpOffer } from 'app/shared/model/help-offer.model';
 import { HelpOfferService } from './help-offer.service';
-import { IHelpAction } from 'app/shared/model/help-action.model';
-import { HelpActionService } from 'app/entities/help-action';
 import { IUser, UserService } from 'app/core';
 import { ICategory } from 'app/shared/model/category.model';
 import { CategoryService } from 'app/entities/category';
@@ -21,8 +19,6 @@ export class HelpOfferUpdateComponent implements OnInit {
     helpOffer: IHelpOffer;
     isSaving: boolean;
 
-    helpactions: IHelpAction[];
-
     users: IUser[];
 
     categories: ICategory[];
@@ -34,7 +30,6 @@ export class HelpOfferUpdateComponent implements OnInit {
         protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
         protected helpOfferService: HelpOfferService,
-        protected helpActionService: HelpActionService,
         protected userService: UserService,
         protected categoryService: CategoryService,
         protected elementRef: ElementRef,
@@ -46,13 +41,6 @@ export class HelpOfferUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ helpOffer }) => {
             this.helpOffer = helpOffer;
         });
-        this.helpActionService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IHelpAction[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IHelpAction[]>) => response.body)
-            )
-            .subscribe((res: IHelpAction[]) => (this.helpactions = res), (res: HttpErrorResponse) => this.onError(res.message));
         this.userService
             .query()
             .pipe(
@@ -113,10 +101,6 @@ export class HelpOfferUpdateComponent implements OnInit {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackHelpActionById(index: number, item: IHelpAction) {
-        return item.id;
     }
 
     trackUserById(index: number, item: IUser) {

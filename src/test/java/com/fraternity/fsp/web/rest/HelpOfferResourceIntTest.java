@@ -3,7 +3,6 @@ package com.fraternity.fsp.web.rest;
 import com.fraternity.fsp.FraternityApp;
 
 import com.fraternity.fsp.domain.HelpOffer;
-import com.fraternity.fsp.domain.HelpAction;
 import com.fraternity.fsp.domain.User;
 import com.fraternity.fsp.domain.Category;
 import com.fraternity.fsp.repository.HelpOfferRepository;
@@ -488,25 +487,6 @@ public class HelpOfferResourceIntTest {
 
         // Get all the helpOfferList where dateEnd less than or equals to UPDATED_DATE_END
         defaultHelpOfferShouldBeFound("dateEnd.lessThan=" + UPDATED_DATE_END);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllHelpOffersByHelpOIsEqualToSomething() throws Exception {
-        // Initialize the database
-        HelpAction helpO = HelpActionResourceIntTest.createEntity(em);
-        em.persist(helpO);
-        em.flush();
-        helpOffer.setHelpO(helpO);
-        helpOfferRepository.saveAndFlush(helpOffer);
-        Long helpOId = helpO.getId();
-
-        // Get all the helpOfferList where helpO equals to helpOId
-        defaultHelpOfferShouldBeFound("helpOId.equals=" + helpOId);
-
-        // Get all the helpOfferList where helpO equals to helpOId + 1
-        defaultHelpOfferShouldNotBeFound("helpOId.equals=" + (helpOId + 1));
     }
 
 

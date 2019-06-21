@@ -40,6 +40,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = FraternityApp.class)
 public class HelpActionResourceIntTest {
 
+    private static final String DEFAULT_MESSAGE = "AAAAAAAAAA";
+    private static final String UPDATED_MESSAGE = "BBBBBBBBBB";
+
     @Autowired
     private HelpActionRepository helpActionRepository;
 
@@ -81,7 +84,8 @@ public class HelpActionResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static HelpAction createEntity(EntityManager em) {
-        HelpAction helpAction = new HelpAction();
+        HelpAction helpAction = new HelpAction()
+            .message(DEFAULT_MESSAGE);
         return helpAction;
     }
 
@@ -105,6 +109,7 @@ public class HelpActionResourceIntTest {
         List<HelpAction> helpActionList = helpActionRepository.findAll();
         assertThat(helpActionList).hasSize(databaseSizeBeforeCreate + 1);
         HelpAction testHelpAction = helpActionList.get(helpActionList.size() - 1);
+        assertThat(testHelpAction.getMessage()).isEqualTo(DEFAULT_MESSAGE);
     }
 
     @Test
@@ -136,7 +141,8 @@ public class HelpActionResourceIntTest {
         restHelpActionMockMvc.perform(get("/api/help-actions?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(helpAction.getId().intValue())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(helpAction.getId().intValue())))
+            .andExpect(jsonPath("$.[*].message").value(hasItem(DEFAULT_MESSAGE.toString())));
     }
     
     @Test
@@ -149,7 +155,8 @@ public class HelpActionResourceIntTest {
         restHelpActionMockMvc.perform(get("/api/help-actions/{id}", helpAction.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(helpAction.getId().intValue()));
+            .andExpect(jsonPath("$.id").value(helpAction.getId().intValue()))
+            .andExpect(jsonPath("$.message").value(DEFAULT_MESSAGE.toString()));
     }
 
     @Test
@@ -172,6 +179,8 @@ public class HelpActionResourceIntTest {
         HelpAction updatedHelpAction = helpActionRepository.findById(helpAction.getId()).get();
         // Disconnect from session so that the updates on updatedHelpAction are not directly saved in db
         em.detach(updatedHelpAction);
+        updatedHelpAction
+            .message(UPDATED_MESSAGE);
 
         restHelpActionMockMvc.perform(put("/api/help-actions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -182,6 +191,7 @@ public class HelpActionResourceIntTest {
         List<HelpAction> helpActionList = helpActionRepository.findAll();
         assertThat(helpActionList).hasSize(databaseSizeBeforeUpdate);
         HelpAction testHelpAction = helpActionList.get(helpActionList.size() - 1);
+        assertThat(testHelpAction.getMessage()).isEqualTo(UPDATED_MESSAGE);
     }
 
     @Test

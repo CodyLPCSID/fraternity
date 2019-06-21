@@ -15,12 +15,26 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="fraternityApp.helpAction.message">Message</span></th>
+            <th><span jhiTranslate="fraternityApp.helpAction.helpOffer">Help Offer</span></th>
+            <th><span jhiTranslate="fraternityApp.helpAction.helpRequest">Help Request</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let helpAction of helpActions ;trackBy: trackId">
                 <td><a [routerLink]="['/help-action', helpAction.id, 'view' ]">{{helpAction.id}}</a></td>
+                <td>{{helpAction.message}}</td>
+                <td>
+                    <div *ngIf="helpAction.helpOffer">
+                        <a [routerLink]="['../help-offer', helpAction.helpOffer?.id, 'view' ]" >{{helpAction.helpOffer?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="helpAction.helpRequest">
+                        <a [routerLink]="['../help-request', helpAction.helpRequest?.id, 'view' ]" >{{helpAction.helpRequest?.id}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

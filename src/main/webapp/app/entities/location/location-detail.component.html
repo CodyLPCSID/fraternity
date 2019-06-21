@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="location">
+            <h2><span jhiTranslate="fraternityApp.location.detail.title">Location</span> {{location.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="fraternityApp.location.country">Country</span></dt>
+                <dd>
+                    <span>{{location.country}}</span>
+                </dd>
+                <dt><span jhiTranslate="fraternityApp.location.city">City</span></dt>
+                <dd>
+                    <span>{{location.city}}</span>
+                </dd>
+                <dt><span jhiTranslate="fraternityApp.location.street">Street</span></dt>
+                <dd>
+                    <span>{{location.street}}</span>
+                </dd>
+                <dt><span jhiTranslate="fraternityApp.location.nbStreet">Nb Street</span></dt>
+                <dd>
+                    <span>{{location.nbStreet}}</span>
+                </dd>
+                <dt><span jhiTranslate="fraternityApp.location.zipCode">Zip Code</span></dt>
+                <dd>
+                    <span>{{location.zipCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="fraternityApp.location.longitute">Longitute</span></dt>
+                <dd>
+                    <span>{{location.longitute}}</span>
+                </dd>
+                <dt><span jhiTranslate="fraternityApp.location.latitude">Latitude</span></dt>
+                <dd>
+                    <span>{{location.latitude}}</span>
+                </dd>
+                <dt><span jhiTranslate="fraternityApp.location.helpOffer">Help Offer</span></dt>
+                <dd>
+                    <div *ngIf="location.helpOffer">
+                        <a [routerLink]="['/help-offer', location.helpOffer?.id, 'view']">{{location.helpOffer?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/location', location.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

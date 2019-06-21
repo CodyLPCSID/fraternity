@@ -46,6 +46,9 @@ public class AssociationResourceIntTest {
     private static final String DEFAULT_STATUT = "AAAAAAAAAA";
     private static final String UPDATED_STATUT = "BBBBBBBBBB";
 
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
+
     @Autowired
     private AssociationRepository associationRepository;
 
@@ -89,7 +92,8 @@ public class AssociationResourceIntTest {
     public static Association createEntity(EntityManager em) {
         Association association = new Association()
             .nSiret(DEFAULT_N_SIRET)
-            .statut(DEFAULT_STATUT);
+            .statut(DEFAULT_STATUT)
+            .name(DEFAULT_NAME);
         return association;
     }
 
@@ -115,6 +119,7 @@ public class AssociationResourceIntTest {
         Association testAssociation = associationList.get(associationList.size() - 1);
         assertThat(testAssociation.getnSiret()).isEqualTo(DEFAULT_N_SIRET);
         assertThat(testAssociation.getStatut()).isEqualTo(DEFAULT_STATUT);
+        assertThat(testAssociation.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -148,7 +153,8 @@ public class AssociationResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(association.getId().intValue())))
             .andExpect(jsonPath("$.[*].nSiret").value(hasItem(DEFAULT_N_SIRET.toString())))
-            .andExpect(jsonPath("$.[*].statut").value(hasItem(DEFAULT_STATUT.toString())));
+            .andExpect(jsonPath("$.[*].statut").value(hasItem(DEFAULT_STATUT.toString())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
     }
     
     @Test
@@ -163,7 +169,8 @@ public class AssociationResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(association.getId().intValue()))
             .andExpect(jsonPath("$.nSiret").value(DEFAULT_N_SIRET.toString()))
-            .andExpect(jsonPath("$.statut").value(DEFAULT_STATUT.toString()));
+            .andExpect(jsonPath("$.statut").value(DEFAULT_STATUT.toString()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
     }
 
     @Test
@@ -188,7 +195,8 @@ public class AssociationResourceIntTest {
         em.detach(updatedAssociation);
         updatedAssociation
             .nSiret(UPDATED_N_SIRET)
-            .statut(UPDATED_STATUT);
+            .statut(UPDATED_STATUT)
+            .name(UPDATED_NAME);
 
         restAssociationMockMvc.perform(put("/api/associations")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -201,6 +209,7 @@ public class AssociationResourceIntTest {
         Association testAssociation = associationList.get(associationList.size() - 1);
         assertThat(testAssociation.getnSiret()).isEqualTo(UPDATED_N_SIRET);
         assertThat(testAssociation.getStatut()).isEqualTo(UPDATED_STATUT);
+        assertThat(testAssociation.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

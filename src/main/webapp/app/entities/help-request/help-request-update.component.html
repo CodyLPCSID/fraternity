@@ -51,13 +51,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="fraternityApp.helpRequest.helpR" for="field_helpR">Help R</label>
-                    <select class="form-control" id="field_helpR" name="helpR" [(ngModel)]="helpRequest.helpR" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="helpActionOption.id === helpRequest.helpR?.id ? helpRequest.helpR : helpActionOption" *ngFor="let helpActionOption of helpactions; trackBy: trackHelpActionById">{{helpActionOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="fraternityApp.helpRequest.user" for="field_user">User</label>
                     <select class="form-control" id="field_user" name="user" [(ngModel)]="helpRequest.user" >
                         <option [ngValue]="null"></option>

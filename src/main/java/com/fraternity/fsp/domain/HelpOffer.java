@@ -49,10 +49,6 @@ public class HelpOffer implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("helpOffers")
-    private HelpAction helpO;
-
-    @ManyToOne
-    @JsonIgnoreProperties("helpOffers")
     private User user;
 
     @ManyToOne
@@ -157,19 +153,6 @@ public class HelpOffer implements Serializable {
 
     public void setPictureContentType(String pictureContentType) {
         this.pictureContentType = pictureContentType;
-    }
-
-    public HelpAction getHelpO() {
-        return helpO;
-    }
-
-    public HelpOffer helpO(HelpAction helpAction) {
-        this.helpO = helpAction;
-        return this;
-    }
-
-    public void setHelpO(HelpAction helpAction) {
-        this.helpO = helpAction;
     }
 
     public User getUser() {

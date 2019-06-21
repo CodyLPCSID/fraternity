@@ -1,5 +1,16 @@
 {
-    "name": "Association",
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "associationMember",
+            "otherEntityRelationshipName": "association",
+            "relationshipName": "asso",
+            "otherEntityField": "id",
+            "otherEntityRelationshipNameUndefined": false
+        }
+    ],
     "fields": [
         {
             "fieldName": "nSiret",
@@ -8,24 +19,18 @@
         {
             "fieldName": "statut",
             "fieldType": "String"
-        }
-    ],
-    "relationships": [
+        },
         {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "associationMember",
-            "otherEntityRelationshipName": "association",
-            "relationshipName": "asso",
-            "otherEntityField": "id"
+            "fieldName": "name",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20190404080709",
-    "entityTableName": "association",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": false,
     "service": "no",
+    "entityTableName": "association",
+    "databaseType": "sql",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }

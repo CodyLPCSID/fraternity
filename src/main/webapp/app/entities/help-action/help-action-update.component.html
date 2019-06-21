@@ -9,7 +9,26 @@
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="helpAction.id" readonly />
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="fraternityApp.helpAction.message" for="field_message">Message</label>
+                    <input type="text" class="form-control" name="message" id="field_message"
+                        [(ngModel)]="helpAction.message" />
+                </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="fraternityApp.helpAction.helpOffer" for="field_helpOffer">Help Offer</label>
+                    <select class="form-control" id="field_helpOffer" name="helpOffer" [(ngModel)]="helpAction.helpOffer" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="helpOfferOption.id === helpAction.helpOffer?.id ? helpAction.helpOffer : helpOfferOption" *ngFor="let helpOfferOption of helpoffers; trackBy: trackHelpOfferById">{{helpOfferOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="fraternityApp.helpAction.helpRequest" for="field_helpRequest">Help Request</label>
+                    <select class="form-control" id="field_helpRequest" name="helpRequest" [(ngModel)]="helpAction.helpRequest" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="helpRequestOption.id === helpAction.helpRequest?.id ? helpAction.helpRequest : helpRequestOption" *ngFor="let helpRequestOption of helprequests; trackBy: trackHelpRequestById">{{helpRequestOption.id}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

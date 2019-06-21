@@ -14,7 +14,10 @@
             },
             "detail": {
                 "title": "Help Action"
-            }
+            },
+            "message": "Message",
+            "helpOffer": "Help Offer",
+            "helpRequest": "Help Request"
         }
     }
 }

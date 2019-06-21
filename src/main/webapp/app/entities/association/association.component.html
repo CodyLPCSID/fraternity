@@ -17,6 +17,7 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="fraternityApp.association.nSiret">N Siret</span></th>
             <th><span jhiTranslate="fraternityApp.association.statut">Statut</span></th>
+            <th><span jhiTranslate="fraternityApp.association.name">Name</span></th>
             <th><span jhiTranslate="fraternityApp.association.asso">Asso</span></th>
             <th></th>
             </tr>
@@ -26,6 +27,7 @@
                 <td><a [routerLink]="['/association', association.id, 'view' ]">{{association.id}}</a></td>
                 <td>{{association.nSiret}}</td>
                 <td>{{association.statut}}</td>
+                <td>{{association.name}}</td>
                 <td>
                     <div *ngIf="association.asso">
                         <a [routerLink]="['../association-member', association.asso?.id, 'view' ]" >{{association.asso?.id}}</a>

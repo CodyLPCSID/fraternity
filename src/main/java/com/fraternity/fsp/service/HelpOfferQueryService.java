@@ -98,10 +98,6 @@ public class HelpOfferQueryService extends QueryService<HelpOffer> {
             if (criteria.getDateEnd() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDateEnd(), HelpOffer_.dateEnd));
             }
-            if (criteria.getHelpOId() != null) {
-                specification = specification.and(buildSpecification(criteria.getHelpOId(),
-                    root -> root.join(HelpOffer_.helpO, JoinType.LEFT).get(HelpAction_.id)));
-            }
             if (criteria.getUserId() != null) {
                 specification = specification.and(buildSpecification(criteria.getUserId(),
                     root -> root.join(HelpOffer_.user, JoinType.LEFT).get(User_.id)));

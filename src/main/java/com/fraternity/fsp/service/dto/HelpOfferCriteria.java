@@ -35,8 +35,6 @@ public class HelpOfferCriteria implements Serializable {
 
     private LocalDateFilter dateEnd;
 
-    private LongFilter helpOId;
-
     private LongFilter userId;
 
     private LongFilter categoryId;
@@ -89,14 +87,6 @@ public class HelpOfferCriteria implements Serializable {
         this.dateEnd = dateEnd;
     }
 
-    public LongFilter getHelpOId() {
-        return helpOId;
-    }
-
-    public void setHelpOId(LongFilter helpOId) {
-        this.helpOId = helpOId;
-    }
-
     public LongFilter getUserId() {
         return userId;
     }
@@ -130,7 +120,6 @@ public class HelpOfferCriteria implements Serializable {
             Objects.equals(datePost, that.datePost) &&
             Objects.equals(dateStart, that.dateStart) &&
             Objects.equals(dateEnd, that.dateEnd) &&
-            Objects.equals(helpOId, that.helpOId) &&
             Objects.equals(userId, that.userId) &&
             Objects.equals(categoryId, that.categoryId);
     }
@@ -144,7 +133,6 @@ public class HelpOfferCriteria implements Serializable {
         datePost,
         dateStart,
         dateEnd,
-        helpOId,
         userId,
         categoryId
         );
@@ -159,7 +147,6 @@ public class HelpOfferCriteria implements Serializable {
                 (datePost != null ? "datePost=" + datePost + ", " : "") +
                 (dateStart != null ? "dateStart=" + dateStart + ", " : "") +
                 (dateEnd != null ? "dateEnd=" + dateEnd + ", " : "") +
-                (helpOId != null ? "helpOId=" + helpOId + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
                 (categoryId != null ? "categoryId=" + categoryId + ", " : "") +
             "}";

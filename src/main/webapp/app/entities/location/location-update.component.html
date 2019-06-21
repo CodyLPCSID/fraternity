@@ -1,0 +1,66 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-location-heading" jhiTranslate="fraternityApp.location.home.createOrEditLabel">Create or edit a Location</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!location.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="location.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="fraternityApp.location.country" for="field_country">Country</label>
+                    <input type="text" class="form-control" name="country" id="field_country"
+                        [(ngModel)]="location.country" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="fraternityApp.location.city" for="field_city">City</label>
+                    <input type="text" class="form-control" name="city" id="field_city"
+                        [(ngModel)]="location.city" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="fraternityApp.location.street" for="field_street">Street</label>
+                    <input type="text" class="form-control" name="street" id="field_street"
+                        [(ngModel)]="location.street" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="fraternityApp.location.nbStreet" for="field_nbStreet">Nb Street</label>
+                    <input type="text" class="form-control" name="nbStreet" id="field_nbStreet"
+                        [(ngModel)]="location.nbStreet" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="fraternityApp.location.zipCode" for="field_zipCode">Zip Code</label>
+                    <input type="text" class="form-control" name="zipCode" id="field_zipCode"
+                        [(ngModel)]="location.zipCode" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="fraternityApp.location.longitute" for="field_longitute">Longitute</label>
+                    <input type="text" class="form-control" name="longitute" id="field_longitute"
+                        [(ngModel)]="location.longitute" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="fraternityApp.location.latitude" for="field_latitude">Latitude</label>
+                    <input type="text" class="form-control" name="latitude" id="field_latitude"
+                        [(ngModel)]="location.latitude" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="fraternityApp.location.helpOffer" for="field_helpOffer">Help Offer</label>
+                    <select class="form-control" id="field_helpOffer" name="helpOffer" [(ngModel)]="location.helpOffer" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="helpOfferOption.id === location.helpOffer?.id ? location.helpOffer : helpOfferOption" *ngFor="let helpOfferOption of helpoffers; trackBy: trackHelpOfferById">{{helpOfferOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -44,6 +44,7 @@ public class CacheConfiguration {
             cm.createCache(com.fraternity.fsp.domain.HelpRequest.class.getName(), jcacheConfiguration);
             cm.createCache(com.fraternity.fsp.domain.HelpAction.class.getName(), jcacheConfiguration);
             cm.createCache(com.fraternity.fsp.domain.Category.class.getName(), jcacheConfiguration);
+            cm.createCache(com.fraternity.fsp.domain.Location.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

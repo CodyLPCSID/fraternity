@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(AssociationService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Association(0, 'AAAAAAA', 'AAAAAAA');
+            elemDefault = new Association(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -56,7 +56,8 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         nSiret: 'BBBBBB',
-                        statut: 'BBBBBB'
+                        statut: 'BBBBBB',
+                        name: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -74,7 +75,8 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         nSiret: 'BBBBBB',
-                        statut: 'BBBBBB'
+                        statut: 'BBBBBB',
+                        name: 'BBBBBB'
                     },
                     elemDefault
                 );
