@@ -47,7 +47,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="#" routerLinkActive="active"
+                        <a class="dropdown-item" routerLink="/addRequest" routerLinkActive="active"
                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.action.addRequest">Add Offer</span>
@@ -123,21 +123,9 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="association" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.association">Association</span>
-                        </a>
-                    </li>
-                    <li>
                         <a class="dropdown-item" routerLink="help-request" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.helpRequest">Help Request</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="help-action" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.helpAction">Help Action</span>
                         </a>
                     </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
